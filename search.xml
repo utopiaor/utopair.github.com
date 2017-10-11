@@ -3,33 +3,8 @@
   
     
     <entry>
-      <title><![CDATA[第一话 匆匆一眼]]></title>
-      <url>/2017/10/11/%E8%80%B3%E8%AF%AD%E3%80%81%E4%B8%80%E4%B8%96%E5%8A%AB-01/</url>
-      <content type="html"><![CDATA[<p><strong>四月</strong>多雨的季节，好不容易迎来一次碧空如洗的晴天，仿佛睡着的城市一下子醒了过来。陈家晖也好不容易忙完了手头的工作，呆呆地站在十一楼的窗前，他心里空落落的。点了一根烟，吸了一口，觉得有点头晕，就扔了。</p>
-<p>那一刻，他想要跳下去。有时候他真觉得自己会从那里跳下去。他很孤独，在喧闹的人群里，他的微笑让所有人都觉得他是个很温和很开心的人。只有他自己知道，他孤独得快要死掉。</p>
-<p>孤独要藏住，仿佛是一件很丢脸的事。可是，谁不是孤独的呢？越是孤独地人越会笑，他怕人看到。<br>他突然想出去走走，喝杯咖啡，去看看路上的人群，去看那些迟春的花朵。</p>
-<p>他很少出门，每次出门都会穿得整整齐齐的，用妮维维洁一次面，再用碧欧泉控油，用Sukin洗发水认真地洗一次头，喷上KENZO香水，打扮得很漂亮。他工作的时候很随意，随意的穿着，随意地写代码，随意地例行公事，随意的应付别人，一切都理所当然。但是今天不一样，他觉得很重要，所以要穿得好看点。</p>
-<p>人的外貌不是重要的，但是面貌很重要。外貌可以张扬，可以温煦，可以冷峻，可以帅气，甚至可以猥琐，但是面貌一定要健康。对，这很重要，他很健康。</p>
-<p>他走过汹涌的人群，看到一个背影，头发束起来，穿着蓝色连衣裙，肩上背着黄色的Cambridge Satchel的包包。他觉得那个女孩很熟悉，仿佛在哪里见过，他没有走上去，只是跟着那个女孩。</p>
-<p>他一直走在女孩后面，差不多3米的距离，刻意保持着和女孩同样的脚步频率。在人少的地方，女孩似乎觉得有人在跟着她，回过了头，眼睛刚好落在陈家晖的身上。女孩停顿了3秒针，眼中掠过一阵不知名的神色，然后别过头，继续往前走。</p>
-<p>陈家晖没有再跟，他停下来，在路边的休息椅上坐了下来。他点了一根烟，抽了一口，觉得头晕，扔掉了。他的脑海里突然浮现那个女孩的脸，他觉得有点窒息。他起身跑起来，要去追上那个女孩，他要追上去跟那个女孩说，嗨，你好，我叫陈家晖，我想认识你。<br>前面只有汹涌的人群，你追不上任何人。他觉得有点失落。他恨自己。</p>
-<p>走在星巴克的门口，他停了下来，看了看手表，下午四点半，应该去喝杯咖啡。他去咖啡厅只会喝espresso，要double espreso，配一杯温水。第一份espreso他要一口闷掉，他贪恋这种味道，像毒药，仿佛喝下去就会死掉，可他每次都活着，他觉得很开心。然后他会喝几口温水，再慢慢地品尝第二份咖啡，那种苦感，与他的孤独同味。</p>
-<p>他一口喝掉那份espresso，抬起头，看到那个穿着蓝色连衣裙的姑娘。</p>
-<p>她在对他笑。</p>
-]]></content>
-      
-        
-        <tags>
-            
-            <tag> 耳语、一世劫 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Hello World]]></title>
-      <url>/2017/10/11/hello-world/</url>
+      <url>/2017/10/12/hello-world/</url>
       <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
@@ -51,6 +26,31 @@
         <tags>
             
             <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[第一话 匆匆一眼]]></title>
+      <url>/2017/10/11/%E8%80%B3%E8%AF%AD%E3%80%81%E4%B8%80%E4%B8%96%E5%8A%AB-01/</url>
+      <content type="html"><![CDATA[<p><strong>四月</strong>多雨的季节，好不容易迎来一次碧空如洗的晴天，仿佛睡着的城市一下子醒了过来。陈家晖也好不容易忙完了手头的工作，呆呆地站在十一楼的窗前，他心里空落落的。点了一根烟，吸了一口，觉得有点头晕，就扔了。</p>
+<p>那一刻，他想要跳下去。有时候他真觉得自己会从那里跳下去。他很孤独，在喧闹的人群里，他的微笑让所有人都觉得他是个很温和很开心的人。只有他自己知道，他孤独得快要死掉。</p>
+<p>孤独要藏住，仿佛是一件很丢脸的事。可是，谁不是孤独的呢？越是孤独地人越会笑，他怕人看到。<br>他突然想出去走走，喝杯咖啡，去看看路上的人群，去看那些迟春的花朵。</p>
+<p>他很少出门，每次出门都会穿得整整齐齐的，用妮维维洁一次面，再用碧欧泉控油，用Sukin洗发水认真地洗一次头，喷上KENZO香水，打扮得很漂亮。他工作的时候很随意，随意的穿着，随意地写代码，随意地例行公事，随意的应付别人，一切都理所当然。但是今天不一样，他觉得很重要，所以要穿得好看点。</p>
+<p>人的外貌不是重要的，但是面貌很重要。外貌可以张扬，可以温煦，可以冷峻，可以帅气，甚至可以猥琐，但是面貌一定要健康。对，这很重要，他很健康。</p>
+<p>他走过汹涌的人群，看到一个背影，头发束起来，穿着蓝色连衣裙，肩上背着黄色的Cambridge Satchel的包包。他觉得那个女孩很熟悉，仿佛在哪里见过，他没有走上去，只是跟着那个女孩。</p>
+<p>他一直走在女孩后面，差不多3米的距离，刻意保持着和女孩同样的脚步频率。在人少的地方，女孩似乎觉得有人在跟着她，回过了头，眼睛刚好落在陈家晖的身上。女孩停顿了3秒针，眼中掠过一阵不知名的神色，然后别过头，继续往前走。</p>
+<p>陈家晖没有再跟，他停下来，在路边的休息椅上坐了下来。他点了一根烟，抽了一口，觉得头晕，扔掉了。他的脑海里突然浮现那个女孩的脸，他觉得有点窒息。他起身跑起来，要去追上那个女孩，他要追上去跟那个女孩说，嗨，你好，我叫陈家晖，我想认识你。<br>前面只有汹涌的人群，你追不上任何人。他觉得有点失落。他恨自己。</p>
+<p>走在星巴克的门口，他停了下来，看了看手表，下午四点半，应该去喝杯咖啡。他去咖啡厅只会喝espresso，要double espreso，配一杯温水。第一份espreso他要一口闷掉，他贪恋这种味道，像毒药，仿佛喝下去就会死掉，可他每次都活着，他觉得很开心。然后他会喝几口温水，再慢慢地品尝第二份咖啡，那种苦感，与他的孤独同味。</p>
+<p>他一口喝掉那份espresso，抬起头，看到那个穿着蓝色连衣裙的姑娘。</p>
+<p>她在对他笑。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 耳语、一世劫 </tag>
             
         </tags>
         
