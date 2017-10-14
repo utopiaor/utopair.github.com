@@ -3,6 +3,30 @@
   
     
     <entry>
+      <title><![CDATA[树莓派简介]]></title>
+      <url>/2017/10/14/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%AE%80%E4%BB%8B/</url>
+      <content type="html"><![CDATA[<h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派简介"><a href="#树莓派简介" class="headerlink" title="树莓派简介"></a>树莓派简介</h2><h3 id="1、树莓派是什么"><a href="#1、树莓派是什么" class="headerlink" title="1、树莓派是什么"></a>1、树莓派是什么</h3><p>Raspberry Pi(中文名为“树莓派”,简写为RPi，或者RasPi/RPi)是为学生计算机编程教育而设计，只有信用卡 大小的卡片式电脑，其系统基于Linux。<br>树莓派由注册于英国的慈善组织“Raspberry Pi 基金会”开发，Eben·Upton/埃·厄普顿为项目带头人。2012年3月，英国剑桥大学埃本·阿普顿（Eben Epton）正式发售世界上最小的台式机，又称卡片式电脑，外形只有信用卡大小，却具有电脑的所有基本功能，这就是Raspberry Pi电脑板，中文译名”树莓派”！这一基金会以提升学校计算机科学及相关学科的教育，让计算机变得有趣为宗旨。基金会期望这 一款电脑无论是在发展中国家还是在发达国家，会有更多的其它应用不断被开发出来，并应用到更多领域。</p>
+<pre><code>一句话：树莓派是一个卡片大小的开发板，上面可以运行Linux系统，我们可以用它开发我想要的设备。  
+</code></pre><p>以下是树莓派2B的实物图<br><img src="https://i.imgur.com/Qe4uDAe.png" alt=""></p>
+<h3 id="2、树莓派的种类"><a href="#2、树莓派的种类" class="headerlink" title="2、树莓派的种类"></a>2、树莓派的种类</h3><p>A型：1个USB、无有线网络接口、功率2.5W,500mA、256MB RAM（基本已经见不到了）<br>B型：2个USB、支持有线网络、功率3.5W，700mA、512MB RAM、26个GPIO(市售还有很多)。<br>B+型：4个USB口、支持有线网络，功耗1W，512M RAM 40个GPIO（2014新出的，推荐使用）<br>购买请在淘宝上搜一下，非常多：200到–300元之间（裸板，不含SD卡、电源）<br><img src="https://i.imgur.com/bB5P7Jv.png" alt="raspberry1"></p>
+<h3 id="3、树莓派参数"><a href="#3、树莓派参数" class="headerlink" title="3、树莓派参数"></a>3、树莓派参数</h3><p>B型：<br>处理器<br>BroadcomBCM2835（CPU，GPU，DSP和SDRAM，USB）<br>CPU<br>ARM1176JZF-S核心（ARM11系列）700MHz<br>GPU<br>Broadcom VideoCrore IV，OpenGL ES 2.0,1080p 30 h.264/MPEG-4 AVC高清解码器<br>内存<br>512MByte<br>USB 2.0<br>2（支持USB hub扩展）<br>影像输出<br>Composite RCA（PAL &amp; NTSC），HDMI（rev 1.3 &amp; 1.4），raw LCD Panels via DSI 14 HDMI resolution from 640x350 to 1920x1200 plus various PAL andNTSC standards<br>音源输出<br>3.5mm插孔，HDMI<br>板载存储<br>SD/MMC/SDIO卡插槽<br>网络接口<br>10/100以太网接口<br>外设<br>8xGPIO、UART、I2C、带两个选择的SPI总线，+3.3V，+5V，ground（负极）<br>额定功率<br>700mA（3.5W）<br>电源输入<br>5V / 通过MicroUSB或GPIO头<br>总体尺寸<br>85.60 x 53.98 mm（3.370 x 2.125 in）<br>操作系统<br>Debian GNU/linux，Fedora，Arch Linux ARM，RISC OS, XBMC</p>
+<p>B+改进<br>• 更多的GPIO：B+将通用输入输出引脚增加到了40个，而Model B则只有26个；<br>• 更多的USB：B+提供了4个USB端口，对热插拔有着更好的兼容性(Model B只有2个)；<br>• 支持microSD：旧款的SD卡插槽，已经被换成了更漂亮的推入式microSD卡槽；<br>• 更低的功耗：将线性式稳压器换成了开关式，功耗降低了0.5W到1W；<br>• 更好的音频：音频电路部分采用了专用的低噪供电；<br>• 简洁的外形：USB接口被推到了主板的一边，复合视频移到了3.5mm音频口的位置，此外还增加了4个独立的安装孔。  </p>
+<h3 id="4、树莓派分布图"><a href="#4、树莓派分布图" class="headerlink" title="4、树莓派分布图"></a>4、树莓派分布图</h3><p>B型，B+类似，请自行对比参考<br><img src="https://i.imgur.com/073ZyQ6.png" alt="raspberry2">  </p>
+<h3 id="5、支持的操作系统"><a href="#5、支持的操作系统" class="headerlink" title="5、支持的操作系统"></a>5、支持的操作系统</h3><p> 树莓派支持多种操作系统，如官方操作系统为raspberryPi,ubuntu，Window10 IOT和google定制android等<br><img src="https://i.imgur.com/TtiGDU8.png" alt="">  </p>
+<h3 id="6、各代产品的对比"><a href="#6、各代产品的对比" class="headerlink" title="6、各代产品的对比"></a>6、各代产品的对比</h3><p><img src="https://i.imgur.com/ozJRpEz.png" alt="">  </p>
+<h3 id="7、树莓派的用途"><a href="#7、树莓派的用途" class="headerlink" title="7、树莓派的用途"></a>7、树莓派的用途</h3><p>• 树莓派编程<br><img src="https://i.imgur.com/gDrSD0z.png" alt=""><br>• 树莓派外接传感器<br><img src="https://i.imgur.com/pizReHj.png" alt=""><br>• 树莓派网络监控<br><img src="https://i.imgur.com/1ZjQQex.png" alt=""><br>• 树莓派网络小车<br><img src="https://i.imgur.com/FYCGO05.png" alt=""><br>• 树莓派科学上网<br><img src="https://i.imgur.com/IGFX5Sm.png" alt=""><br>• 树莓派网络电视盒子<br><img src="https://i.imgur.com/QGHaeCP.png" alt=""><br>• 树莓派路由器<br><img src="https://i.imgur.com/1ersydG.png" alt="">  </p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 玩转树莓派 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Hello World]]></title>
       <url>/2017/10/12/hello-world/</url>
       <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
@@ -66,30 +90,6 @@
         <tags>
             
             <tag> 耳语、一世劫 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[树莓派简介]]></title>
-      <url>/2017/10/11/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%AE%80%E4%BB%8B/</url>
-      <content type="html"><![CDATA[<h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派简介"><a href="#树莓派简介" class="headerlink" title="树莓派简介"></a>树莓派简介</h2><h3 id="1、树莓派是什么"><a href="#1、树莓派是什么" class="headerlink" title="1、树莓派是什么"></a>1、树莓派是什么</h3><p>Raspberry Pi(中文名为“树莓派”,简写为RPi，或者RasPi/RPi)是为学生计算机编程教育而设计，只有信用卡 大小的卡片式电脑，其系统基于Linux。<br>树莓派由注册于英国的慈善组织“Raspberry Pi 基金会”开发，Eben·Upton/埃·厄普顿为项目带头人。2012年3月，英国剑桥大学埃本·阿普顿（Eben Epton）正式发售世界上最小的台式机，又称卡片式电脑，外形只有信用卡大小，却具有电脑的所有基本功能，这就是Raspberry Pi电脑板，中文译名”树莓派”！这一基金会以提升学校计算机科学及相关学科的教育，让计算机变得有趣为宗旨。基金会期望这 一款电脑无论是在发展中国家还是在发达国家，会有更多的其它应用不断被开发出来，并应用到更多领域。</p>
-<pre><code>一句话：树莓派是一个卡片大小的开发板，上面可以运行Linux系统，我们可以用它开发我想要的设备。  
-</code></pre><p>以下是树莓派2B的实物图<br><img src="https://i.imgur.com/Qe4uDAe.png" alt=""></p>
-<h3 id="2、树莓派的种类"><a href="#2、树莓派的种类" class="headerlink" title="2、树莓派的种类"></a>2、树莓派的种类</h3><p>A型：1个USB、无有线网络接口、功率2.5W,500mA、256MB RAM（基本已经见不到了）<br>B型：2个USB、支持有线网络、功率3.5W，700mA、512MB RAM、26个GPIO(市售还有很多)。<br>B+型：4个USB口、支持有线网络，功耗1W，512M RAM 40个GPIO（2014新出的，推荐使用）<br>购买请在淘宝上搜一下，非常多：200到–300元之间（裸板，不含SD卡、电源）<br><img src="https://i.imgur.com/bB5P7Jv.png" alt="raspberry1"></p>
-<h3 id="3、树莓派参数"><a href="#3、树莓派参数" class="headerlink" title="3、树莓派参数"></a>3、树莓派参数</h3><p>B型：<br>处理器<br>BroadcomBCM2835（CPU，GPU，DSP和SDRAM，USB）<br>CPU<br>ARM1176JZF-S核心（ARM11系列）700MHz<br>GPU<br>Broadcom VideoCrore IV，OpenGL ES 2.0,1080p 30 h.264/MPEG-4 AVC高清解码器<br>内存<br>512MByte<br>USB 2.0<br>2（支持USB hub扩展）<br>影像输出<br>Composite RCA（PAL &amp; NTSC），HDMI（rev 1.3 &amp; 1.4），raw LCD Panels via DSI 14 HDMI resolution from 640x350 to 1920x1200 plus various PAL andNTSC standards<br>音源输出<br>3.5mm插孔，HDMI<br>板载存储<br>SD/MMC/SDIO卡插槽<br>网络接口<br>10/100以太网接口<br>外设<br>8xGPIO、UART、I2C、带两个选择的SPI总线，+3.3V，+5V，ground（负极）<br>额定功率<br>700mA（3.5W）<br>电源输入<br>5V / 通过MicroUSB或GPIO头<br>总体尺寸<br>85.60 x 53.98 mm（3.370 x 2.125 in）<br>操作系统<br>Debian GNU/linux，Fedora，Arch Linux ARM，RISC OS, XBMC</p>
-<p>B+改进<br>• 更多的GPIO：B+将通用输入输出引脚增加到了40个，而Model B则只有26个；<br>• 更多的USB：B+提供了4个USB端口，对热插拔有着更好的兼容性(Model B只有2个)；<br>• 支持microSD：旧款的SD卡插槽，已经被换成了更漂亮的推入式microSD卡槽；<br>• 更低的功耗：将线性式稳压器换成了开关式，功耗降低了0.5W到1W；<br>• 更好的音频：音频电路部分采用了专用的低噪供电；<br>• 简洁的外形：USB接口被推到了主板的一边，复合视频移到了3.5mm音频口的位置，此外还增加了4个独立的安装孔。  </p>
-<h3 id="4、树莓派分布图"><a href="#4、树莓派分布图" class="headerlink" title="4、树莓派分布图"></a>4、树莓派分布图</h3><p>B型，B+类似，请自行对比参考<br><img src="https://i.imgur.com/073ZyQ6.png" alt="raspberry2">  </p>
-<h3 id="5、支持的操作系统"><a href="#5、支持的操作系统" class="headerlink" title="5、支持的操作系统"></a>5、支持的操作系统</h3><p> 树莓派支持多种操作系统，如官方操作系统为raspberryPi,ubuntu，Window10 IOT和google定制android等<br><img src="https://i.imgur.com/TtiGDU8.png" alt="">  </p>
-<h3 id="6、各代产品的对比"><a href="#6、各代产品的对比" class="headerlink" title="6、各代产品的对比"></a>6、各代产品的对比</h3><p><img src="https://i.imgur.com/ozJRpEz.png" alt="">  </p>
-<h3 id="7、树莓派的用途"><a href="#7、树莓派的用途" class="headerlink" title="7、树莓派的用途"></a>7、树莓派的用途</h3><p>• 树莓派编程<br><img src="https://i.imgur.com/gDrSD0z.png" alt=""><br>• 树莓派外接传感器<br><img src="https://i.imgur.com/pizReHj.png" alt=""><br>• 树莓派网络监控<br><img src="https://i.imgur.com/1ZjQQex.png" alt=""><br>• 树莓派网络小车<br><img src="https://i.imgur.com/FYCGO05.png" alt=""><br>• 树莓派科学上网<br><img src="https://i.imgur.com/IGFX5Sm.png" alt=""><br>• 树莓派网络电视盒子<br><img src="https://i.imgur.com/QGHaeCP.png" alt=""><br>• 树莓派路由器<br><img src="https://i.imgur.com/1ersydG.png" alt="">  </p>
-]]></content>
-      
-        
-        <tags>
-            
-            <tag> 玩转树莓派 </tag>
             
         </tags>
         
