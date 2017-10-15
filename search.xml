@@ -5,12 +5,15 @@
     <entry>
       <title><![CDATA[树莓派系统安装与启动]]></title>
       <url>/2017/10/15/2017-10-15-12-00%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85/</url>
-      <content type="html"><![CDATA[<h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派系统安装与启动"><a href="#树莓派系统安装与启动" class="headerlink" title="树莓派系统安装与启动"></a>树莓派系统安装与启动</h2><p>树莓派没有板载flash、MMC和硬盘等存储设备，只支持SD卡启动<br>以下操作均在windows7 32位操作系统上进行，linux和mac可参考附录链接  </p>
+      <content type="html"><![CDATA[<h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派系统安装与启动"><a href="#树莓派系统安装与启动" class="headerlink" title="树莓派系统安装与启动"></a>树莓派系统安装与启动</h2><p>树莓派没有板载flash、MMC和硬盘等存储设备，只支持SD卡启动<br>以下操作均在windows7 32位操作系统上进行</p>
 <h3 id="1、安装准备工作"><a href="#1、安装准备工作" class="headerlink" title="1、安装准备工作"></a>1、安装准备工作</h3><ul>
-<li><p>16G sanDisk Class4 SD卡<br>一张2G以上的SD卡及读卡器，最好是高速卡，推荐Class4以上的卡，卡的速度直接影响树莓派的运行速度，建议最好4G以上，否则后续开发会使用经常不够用  </p>
-</li>
-<li><p>winXP和win7下安装镜像的工具：<a href="https://sourceforge.net/projects/win32diskimager/" target="_blank" rel="external">Win32DiskImager</a></p>
-</li>
+<li>16G sanDisk Class4 SD卡  </li>
+</ul>
+<p>一张2G以上的SD卡及读卡器，最好是高速卡，推荐Class4以上的卡，卡的速度直接影响树莓派的运行速度，建议最好4G以上，否则后续开发会使用经常不够用   </p>
+<ul>
+<li>win7下安装镜像的工具：  <a href="https://sourceforge.net/projects/win32diskimager/" target="_blank" rel="external">Win32DiskImager</a>  </li>
+</ul>
+<ul>
 <li>安装镜像下载：<a href="http://vx2-downloads.raspberrypi.org/raspbian/images/raspbian-2017-09-08/2017-09-07-raspbian-stretch.zip/" target="_blank" rel="external">raspberian</a>  </li>
 </ul>
 <h3 id="2、安装步骤"><a href="#2、安装步骤" class="headerlink" title="2、安装步骤"></a>2、安装步骤</h3><ul>
@@ -23,18 +26,26 @@
 <pre><code>写入需要等待一段时间，安装结束后会弹出完成对话框，说明安装就完成了，如果不成功，请关闭防火墙一类的软件，重新插入SD进行安装  
 请注意安装完，win系统下看到SD只有74MB了，这是正常现象，因为linux下的分区win下是看不到的！
 </code></pre><hr>
-<h3 id="3、树莓派启动"><a href="#3、树莓派启动" class="headerlink" title="3、树莓派启动"></a>3、树莓派启动</h3><h4 id="树莓派供电"><a href="#树莓派供电" class="headerlink" title="树莓派供电"></a>树莓派供电</h4><p>树莓派开发板有两种供电方式：<br><strong>micro usb供电：</strong>所有android手机的充电线都可以给他供电<br><strong>外接电源：</strong>B型（B+型）GPIO 左上角的2、4管角为电源正极，6管角为地<br><img src="https://i.imgur.com/kAtXIIm.png" alt="">  </p>
-<h4 id="访问树莓派"><a href="#访问树莓派" class="headerlink" title="访问树莓派"></a>访问树莓派</h4><p><strong>外接HDMI或者AV显示器，USB鼠标、键盘</strong><br>把树莓派当作一个小电脑，可以用外接键盘、鼠标操作树莓派，树莓派启动界面会显示在HDMI或者AV显示器上<br><strong>使用USB转ttl 串口线通过串口访问树莓派</strong><br>通过USB转TTL转接线，将树莓派的串口连接到电脑上，通过串口工具访问<br>推荐使用<a href="https://mobaxterm.mobatek.net/" target="_blank" rel="external">MobaXterm</a>这款开源集成工具，非常好用！<br>树莓派串口连接口请见下图中所示<br><img src="https://i.imgur.com/KY8zajL.png" alt=""><br><strong>通过网络访问</strong><br>如果没有显示器等设备，可以通过网络方式访问树莓派，通过SSH、VNC和远程桌面来连接，不仅方便、经济，还有利于后续开发 </p>
+<h3 id="3、树莓派启动"><a href="#3、树莓派启动" class="headerlink" title="3、树莓派启动"></a>3、树莓派启动</h3><h4 id="树莓派供电"><a href="#树莓派供电" class="headerlink" title="树莓派供电"></a>树莓派供电</h4><p>树莓派开发板有两种供电方式：  </p>
+<ul>
+<li>micro usb供电<br>所有android手机的充电线都可以给他供电    </li>
+<li>外接电源<br>B型（B+型）GPIO 左上角的2、4管角为电源正极，6管角为地<br><img src="https://i.imgur.com/kAtXIIm.png" alt="">    <h4 id="访问树莓派"><a href="#访问树莓派" class="headerlink" title="访问树莓派"></a>访问树莓派</h4></li>
+<li>外接HDMI或者AV显示器，USB鼠标、键盘<br>把树莓派当作一个小电脑，可以用外接键盘、鼠标操作树莓派，树莓派启动界面会显示在HDMI或者AV显示器上    </li>
+<li>使用USB转ttl 串口线通过串口访问树莓派  </li>
+<li>通过USB转TTL转接线，将树莓派的串口连接到电脑上，通过串口工具访问<br>推荐使用<a href="https://mobaxterm.mobatek.net/" target="_blank" rel="external">MobaXterm</a>这款开源集成工具，非常好用！<br>树莓派串口连接口请见下图中所示<br><img src="https://i.imgur.com/KY8zajL.png" alt="">  </li>
+<li>通过网络访问<br>如果没有显示器等设备，可以通过网络方式访问树莓派，通过SSH、VNC和远程桌面来连接，不仅方便、经济，还有利于后续开发 </li>
+</ul>
 <hr>
 <p><strong>Tips</strong>  </p>
 <pre><code>树莓派默认不开启SSH，可在SD卡的根目录下创建一个名为ssh的空文件，这样开机便启动ssh服务了，树莓派的ip可通过路由器查看
 windows下是无法访问linux分区的，这时候你需要一台linux主机，或者用虚拟机吧！  
-</code></pre><hr>
+</code></pre><blockquote>
 <ul>
-<li>SSH<br>由于树莓派只有一个串口，当我们开发中需要占用这个串口或者我们希望进行远程开发（通过一个根网线或无线连接到树莓派），可以借助Linux系统特有的一种服务SSH来完成</li>
-<li>VNC<br>VNC是linux下面常用的远程桌面，用它可以在windows或者unix主机上方便的通过网络操作远程主机而不需要一个额外的显示器，非常实用</li>
-<li>远程桌面<br>远程桌面是windows自带的一个远程桌面登陆系统，很好用</li>
+<li>SSH<br>  由于树莓派只有一个串口，当我们开发中需要占用这个串口或者我们希望进行远程开发（通过一个根网线或无线连接到树莓派），可以借助Linux系统特有的一种服务SSH来完成  </li>
+<li>VNC<br>  VNC是linux下面常用的远程桌面，用它可以在windows或者unix主机上方便的通过网络操作远程主机而不需要一个额外的显示器，非常实用  </li>
+<li>远程桌面<br>  远程桌面是windows自带的一个远程桌面登陆系统，很好用</li>
 </ul>
+</blockquote>
 ]]></content>
       
         <categories>
