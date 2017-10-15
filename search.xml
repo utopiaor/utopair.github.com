@@ -27,6 +27,8 @@
             
             <category> 小说 </category>
             
+            <category> 文章 </category>
+            
         </categories>
         
         
@@ -192,6 +194,8 @@ windows下是无法访问linux分区的，这时候你需要一台linux主机，
         <categories>
             
             <category> 小说 </category>
+            
+            <category> 文章 </category>
             
         </categories>
         
