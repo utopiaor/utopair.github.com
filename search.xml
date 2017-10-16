@@ -3,6 +3,163 @@
   
     
     <entry>
+      <title><![CDATA[基于Iotgo的物联网云端环境搭建]]></title>
+      <url>/2017/10/16/2017-10-16-22-40%E5%9F%BA%E4%BA%8EIotgo%E7%9A%84%E7%89%A9%E8%81%94%E7%BD%91%E4%BA%91%E7%AB%AF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+      <content type="html"><![CDATA[<h1 id="Iotgo平台简介"><a href="#Iotgo平台简介" class="headerlink" title="Iotgo平台简介"></a>Iotgo平台简介</h1><p>IoTgo项目的初衷是想让用户可以像部署zencart搭建博客，安装 phpbb创建论坛一样，通过部署IoTgo建立自己的云端服务器,服务器不仅仅是接口开放，而是全部代码开源</p>
+<hr>
+<p><strong>github链接</strong><br>物联网平台及webUI<br><a href="https://github.com/itead/IoTgo" target="_blank" rel="external">https://github.com/itead/IoTgo</a><br>手机端app demo<br><a href="https://github.com/itead/IoTgo_Android_App" target="_blank" rel="external">https://github.com/itead/IoTgo_Android_App</a><br>Arduino库<br><a href="https://github.com/itead/ITEADLIB_Arduino_IoTgo" target="_blank" rel="external">https://github.com/itead/ITEADLIB_Arduino_IoTgo</a><br>树莓派，CB等卡片式电脑SDK<br><a href="https://github.com/itead/Segnix/tree/master/libraries/itead_IoTgo" target="_blank" rel="external">https://github.com/itead/Segnix/tree/master/libraries/itead_IoTgo</a>  </p>
+<p>通信协议层仅支持HTTP Websocket，MQTT， CoAP  </p>
+<p>其基本架构如下图所示<br><img src="https://i.imgur.com/Ef0oKXC.png" alt=""></p>
+<hr>
+<h1 id="服务器搭建"><a href="#服务器搭建" class="headerlink" title="服务器搭建"></a>服务器搭建</h1><h2 id="服务器环境"><a href="#服务器环境" class="headerlink" title="服务器环境"></a>服务器环境</h2><pre><code>主机：x86_64
+操作系统: Ubuntu 16.04.3 LTS xenial
+开发语言：html  javascript  python  go 
+Web engine：nodejs
+关系型数据库：mariaDB
+NoSQL: mongoDB
+开发依赖工具: git npm bower forever
+</code></pre><h2 id="平台依赖环境安装"><a href="#平台依赖环境安装" class="headerlink" title="平台依赖环境安装"></a>平台依赖环境安装</h2><h3 id="NoSQL数据库mongoDB安装与配置"><a href="#NoSQL数据库mongoDB安装与配置" class="headerlink" title="NoSQL数据库mongoDB安装与配置"></a>NoSQL数据库mongoDB安装与配置</h3><ul>
+<li>从官网下载最新版本mongodb-linux-ubuntu 16.04 -x64.tar包，解压<br><a href="http://www.mongodb.org/downloads" target="_blank" rel="external">http://www.mongodb.org/downloads</a>  </li>
+</ul>
+<ul>
+<li>将解压后的文件复制到/usr/local/mongodb  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">     tar xvf ubuntu 16.04 Linux 64-bit.tar`  </div><div class="line">     sudo mkdir /usr/local/mongodb  `</div><div class="line">     cp ./ mongodb-linux-ubuntu 16.04 -x64/* /usr/local/mongodb -rf  </div><div class="line">```  </div><div class="line">- 将mongodb的bin目录添加到PATH  </div><div class="line"></div><div class="line">``` </div><div class="line"># /etc/profile: system-wide .profile file for the Bourne shell (sh(1))</div><div class="line"># and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).</div><div class="line"></div><div class="line">if [ &quot;$PS1&quot; ]; then</div><div class="line">  if [ &quot;$BASH&quot; ] &amp;&amp; [ &quot;$BASH&quot; != &quot;/bin/sh&quot; ]; then</div><div class="line">    # The file bash.bashrc already sets the default PS1.</div><div class="line">    # PS1=&apos;\h:\w\$ &apos;</div><div class="line">    if [ -f /etc/bash.bashrc ]; then</div><div class="line">      . /etc/bash.bashrc</div><div class="line">    fi</div><div class="line">  else</div><div class="line">    if [ &quot;`id -u`&quot; -eq 0 ]; then</div><div class="line">      PS1=&apos;# &apos;</div><div class="line">    else</div><div class="line">      PS1=&apos;$ &apos;</div><div class="line">    fi</div><div class="line">  fi</div><div class="line">fi</div><div class="line"></div><div class="line">if [ -d /etc/profile.d ]; then</div><div class="line">  for i in /etc/profile.d/*.sh; do</div><div class="line">    if [ -r $i ]; then</div><div class="line">      . $i</div><div class="line">    fi</div><div class="line">  done</div><div class="line">  unset i</div><div class="line">fi</div><div class="line">export PATH=$PATH:/usr/local/mongodb/bin</div></pre></td></tr></table></figure>
+<p>source /etc/profile 配置立即生效  </p>
+<ul>
+<li>编辑mongod.conf<br>创建/etc/mongod.conf  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">vim /etc/mongod.conf   </div><div class="line">  </div><div class="line">#详细记录输出</div><div class="line">verbose = true</div><div class="line"># 指定服务端口号，默认端口27017</div><div class="line">port = 27017</div><div class="line"># 指定MongoDB日志文件，注意是指定文件不是目录</div><div class="line">logpath = /var/log/mongodb/logs/mongodb.log</div><div class="line"># 使用追加的方式写日志</div><div class="line">logappend = true</div><div class="line"># 指定数据库路径</div><div class="line">dbpath = /data/db/</div><div class="line">#设置每个数据库将被保存在一个单独的目录</div><div class="line">directoryperdb = true</div><div class="line"># 启用验证</div><div class="line">auth = false</div><div class="line">#以守护进程的方式运行MongoDB，创建服务器进程</div><div class="line">fork = true</div><div class="line">#安静输出</div><div class="line">quiet = true</div></pre></td></tr></table></figure>
+<ul>
+<li>创建配置文件中提到的用来保存文件的数据库目录，日志目录,日志文件  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo mkdir -p /data/db/  </div><div class="line">sudo mkdir -p /var/log/mongodb/logs/  </div><div class="line">sudo touch /var/log/mongodb/logs/mongodb.log</div></pre></td></tr></table></figure>
+<ul>
+<li>编写脚本，注册开机启动  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">vim /etc/init.d/mongodb  </div><div class="line"></div><div class="line">#!/bin/sh</div><div class="line">#BEGIN INIT INFO</div><div class="line"># Provides:     mongodb</div><div class="line"># Required-Start:</div><div class="line"># Required-Stop:</div><div class="line"># Default-Start:        2 3 4 5</div><div class="line"># Default-Stop:         0 1 6</div><div class="line"># Short-Description: mongodb</div><div class="line"># Description: mongo db server</div><div class="line">### END INIT INFO</div><div class="line"></div><div class="line">. /lib/lsb/init-functions</div><div class="line"></div><div class="line">PROGRAM=/usr/local/mongodb/bin/mongod</div><div class="line">MONGOPID=`ps -ef | grep &apos;mongod&apos; | grep -v grep | awk &apos;&#123;print $2&#125;&apos;`</div><div class="line"></div><div class="line">test -x $PROGRAM || exit 0</div><div class="line">case &quot;$1&quot; in</div><div class="line">  start)</div><div class="line">     ulimit -n 3000</div><div class="line">     log_begin_msg &quot;Starting MongoDB server&quot;</div><div class="line">     $PROGRAM -f /etc/mongod.conf</div><div class="line">     log_end_msg 0</div><div class="line">     ;;</div><div class="line">  stop)</div><div class="line">     log_begin_msg &quot;Stopping MongoDB server&quot;</div><div class="line">     if [ ! -z &quot;$MONGOPID&quot; ]; then</div><div class="line">        kill -15 $MONGOPID</div><div class="line">     fi</div><div class="line">     log_end_msg 0</div><div class="line">     ;;</div><div class="line">  status)</div><div class="line">     ;;</div><div class="line">  *)</div><div class="line">     log_success_msg &quot;Usage: /etc/init.d/mongodb &#123;start|stop|status&#125;&quot;</div><div class="line">     exit 1</div><div class="line">esac</div><div class="line">exit 0</div></pre></td></tr></table></figure>
+<ul>
+<li>添加可执行权限  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chmod +x /etc/init.d/mongodb</div></pre></td></tr></table></figure>
+<ul>
+<li>注册开机脚本  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo update-rc.d mongodb defaults（移除用update-rc.d -f mongodb remove）</div></pre></td></tr></table></figure>
+<ul>
+<li>开启服务并测试连接  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo service mongodb start（停止服务用sudo service mongodb stop）  </div><div class="line">sudo mongo</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="Node-js安装与配置"><a href="#Node-js安装与配置" class="headerlink" title="Node.js安装与配置"></a>Node.js安装与配置</h3><p>执行以下命令安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update  </div><div class="line">sudo apt-get install -y python-software-properties software-properties-common</div><div class="line">sudo add-apt-repository ppa:chris-lea/node.js </div><div class="line">sudo apt-get update  </div><div class="line">sudo apt-get install nodejs</div></pre></td></tr></table></figure>
+<p>node版本管理，升级到最新版本，否则后面编译会报错  </p>
+<blockquote>
+<p>npm ERR! Make sure you have the latest version of node.js and npm installed.<br>Npm更新到最新版本</p>
+</blockquote>
+<p>node的模块n是专门用来管理node.js的版本的<br>首先安装n模块  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g n</div></pre></td></tr></table></figure>
+<p>升级node.js到最新稳定版  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">n stable</div></pre></td></tr></table></figure>
+<p>测试  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nodejs -v</div></pre></td></tr></table></figure>
+<blockquote>
+<p>v4.2.6  </p>
+</blockquote>
+<p>表明已成功安装nodejs最新版本 </p>
+<hr>
+<h3 id="安装nodejs包管理工具"><a href="#安装nodejs包管理工具" class="headerlink" title="安装nodejs包管理工具"></a>安装nodejs包管理工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install npm</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="安装forever-让node应用作为系统服务使用"><a href="#安装forever-让node应用作为系统服务使用" class="headerlink" title="安装forever,让node应用作为系统服务使用"></a>安装forever,让node应用作为系统服务使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install forever -g</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="安装bower，front-end包管理工具"><a href="#安装bower，front-end包管理工具" class="headerlink" title="安装bower，front-end包管理工具"></a>安装bower，front-end包管理工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g bower</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="iotgo环境构建"><a href="#iotgo环境构建" class="headerlink" title="iotgo环境构建"></a>iotgo环境构建</h2><ul>
+<li>从github导入代码  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/itead/IoTgo.git</div></pre></td></tr></table></figure>
+<ul>
+<li>安装python依赖   </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd IoTgo &amp;&amp; npm install</div></pre></td></tr></table></figure>
+<ul>
+<li>进入web app frontend 安装依赖 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd public/frontend &amp;&amp; sudo bower install –allow-root</div></pre></td></tr></table></figure>
+<ul>
+<li>进入web app backend 安装依赖  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd ../backend &amp;&amp; sudo bower install –allow-root</div></pre></td></tr></table></figure>
+<ul>
+<li>配置iot, config.js为iotgo启动配置文件  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd ../..</div><div class="line">cp config.js.sample config.js</div></pre></td></tr></table></figure>
+<ul>
+<li>更改config.js  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  host: &apos;localhost&apos;,        // Hostname of IoTgo platform</div><div class="line">  db: &#123;                             </div><div class="line">    uri: &apos;mongodb://localhost/iotgo&apos;,   // MongoDB database address</div><div class="line">    options: &#123;</div><div class="line">      user: &apos;iotgo&apos;,                    // MongoDB database username</div><div class="line">      pass: &apos;iotgo&apos;                     // MongoDB database password</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  jwt: &#123;</div><div class="line">    secret: &apos;jwt_secret&apos;                // Shared secret to encrypt JSON Web Token</div><div class="line">  &#125;,</div><div class="line">  admin:&#123;</div><div class="line">    &apos;iotgo&apos;: &apos;iotgo&apos; // Administrator account of IoTgo platform</div><div class="line">  &#125;,</div><div class="line">  page: &#123;</div><div class="line">    limit: 50,                          // Default query page limit</div><div class="line">    sort: -1                            // Default query sort order</div><div class="line">  &#125;,</div><div class="line">  recaptcha: &#123;</div><div class="line">      secret: &apos;&apos;,                       // Google reCAPTCHA serect</div><div class="line">      url: &apos;https://www.google.com/recaptcha/api/siteverify&apos;</div><div class="line">    &#125;,</div><div class="line">  pendingRequestTimeout: 3000,</div><div class="line">  mailgun: &#123;</div><div class="line">          api_key:&apos;&apos;,                   //Mailgun API Key</div><div class="line">          domain:&apos;&apos;,                    //Mailgun Domain Name</div><div class="line">          from:&apos;&apos;                       //Mailgun Default SMTP Login Email</div><div class="line">  &#125;,</div><div class="line">  upgradeUrl:&quot;http://v.itead.cc/api/upgrade&quot;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>让Iotgo作为系统服务使用  </li>
+</ul>
+<p>创建开机启动项,编辑脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/init.d/iotgo</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line"># An init.d script for running a Node.js process as a service using Forever as</div><div class="line"># the process monitor. For more configuration options associated with Forever,</div><div class="line"># see: https://github.com/nodejitsu/forever</div><div class="line">#</div><div class="line"># This was written for Debian distributions such as Ubuntu, but should still</div><div class="line"># work on RedHat, Fedora, or other RPM-based distributions, since none of the</div><div class="line"># built-in service functions are used. So information is provided for both.</div><div class="line">#</div><div class="line"></div><div class="line">NAME=&quot;ITEAD IoTgo&quot;</div><div class="line">NODE_BIN_DIR=&quot;/usr/bin:/usr/local/bin&quot;</div><div class="line">NODE_PATH=&quot;/home/utopiaor/develop/IotGo/IoTgo/node_modules&quot;</div><div class="line">APPLICATION_PATH=&quot;/home/utopiaor/develop/IotGo/IoTgo/bin/www&quot;</div><div class="line">PIDFILE=&quot;/var/run/iotgo.pid&quot;</div><div class="line">LOGFILE=&quot;/var/log/iotgo.log&quot;</div><div class="line">MIN_UPTIME=&quot;5000&quot;</div><div class="line">SPIN_SLEEP_TIME=&quot;2000&quot;</div><div class="line"> </div><div class="line">PATH=$NODE_BIN_DIR:$PATH</div><div class="line">export NODE_PATH=$NODE_PATH</div><div class="line"> </div><div class="line">start() &#123;</div><div class="line">    echo &quot;Starting $NAME&quot;</div><div class="line">    forever \</div><div class="line">      --pidFile $PIDFILE \</div><div class="line">      -a \</div><div class="line">      -l $LOGFILE \</div><div class="line">      --minUptime $MIN_UPTIME \</div><div class="line">      --spinSleepTime $SPIN_SLEEP_TIME \</div><div class="line">      start $APPLICATION_PATH 2&gt;&amp;1 &gt; /dev/null &amp;</div><div class="line">    RETVAL=$?</div><div class="line">&#125;</div><div class="line"> </div><div class="line">stop() &#123;</div><div class="line">    if [ -f $PIDFILE ]; then</div><div class="line">        echo &quot;Shutting down $NAME&quot;</div><div class="line">        forever stop $APPLICATION_PATH 2&gt;&amp;1 &gt; /dev/null</div><div class="line">        rm -f $PIDFILE</div><div class="line">        RETVAL=$?</div><div class="line">    else</div><div class="line">        echo &quot;$NAME is not running.&quot;</div><div class="line">        RETVAL=0</div><div class="line">    fi</div><div class="line">&#125;</div><div class="line"> </div><div class="line">restart() &#123;</div><div class="line">    stop</div><div class="line">    start</div><div class="line">&#125;</div><div class="line"> </div><div class="line">status() &#123;</div><div class="line">    echo `forever list` | grep -q &quot;$APPLICATION_PATH&quot;</div><div class="line">    if [ &quot;$?&quot; -eq &quot;0&quot; ]; then</div><div class="line">        echo &quot;$NAME is running.&quot;</div><div class="line">        RETVAL=0</div><div class="line">    else</div><div class="line">        echo &quot;$NAME is not running.&quot;</div><div class="line">        RETVAL=3</div><div class="line">    fi</div><div class="line">&#125;</div><div class="line"> </div><div class="line">case &quot;$1&quot; in</div><div class="line">    start)</div><div class="line">        start</div><div class="line">        ;;</div><div class="line">    stop)</div><div class="line">        stop</div><div class="line">        ;;</div><div class="line">    status)</div><div class="line">        status</div><div class="line">        ;;</div><div class="line">    restart)</div><div class="line">        restart</div><div class="line">        ;;</div><div class="line">    *)</div><div class="line">        echo &quot;Usage: &#123;start|stop|status|restart&#125;&quot;</div><div class="line">        exit 1</div><div class="line">        ;;</div><div class="line">esac</div><div class="line">exit $RETVAL</div></pre></td></tr></table></figure>
+<ul>
+<li>添加可执行权限  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chmod 755 /etc/init.d/iotgo</div></pre></td></tr></table></figure>
+<ul>
+<li>注册启动脚本  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo update-rc.d iotgo defaults</div></pre></td></tr></table></figure>
+<ul>
+<li>测试   </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo systemctl daemon-reload</div><div class="line">sudo service iotgo start</div></pre></td></tr></table></figure>
+<h3 id="测试iotgo"><a href="#测试iotgo" class="headerlink" title="测试iotgo"></a>测试iotgo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DEBUG=&quot;iotgo&quot; ./bin/www</div></pre></td></tr></table></figure>
+<ul>
+<li>报错</li>
+</ul>
+<blockquote>
+<p>1 Error: Cannot find module ‘../build/Release/bson’<br>2  Error: listen EACCES 0.0.0.0:80  </p>
+</blockquote>
+<p>对于1，没有安装bson，执行 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install bson</div></pre></td></tr></table></figure>
+<p>，并修改</p>
+<blockquote>
+<p> (/home/utopiaor/develop/iot/IoTgo/node_modules/bson/ext/index.js:15:10)<br>bson = require(‘../build/Release/bson’); 为<br>bson = require(‘bson’);</p>
+</blockquote>
+<p>对于2,80端口被其他应用占用，kill 掉其应用  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo lsof -n -P | grep 80</div></pre></td></tr></table></figure>
+<p>然后kill掉相关进程<br>或者更改端口号为8080</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo PORT=&quot;8080&quot; DEBUG=&quot;iotgo&quot; ./bin/www</div></pre></td></tr></table></figure>
+<p>出现打印</p>
+<blockquote>
+<p>iotgo Express server listening on port 80 +0ms</p>
+</blockquote>
+<p>证明iotgo环境已搭建成功</p>
+<p>本机浏览器访问：localhost，局域网内访问192.168.0.10,发现进入的是nodejs的欢迎界面<br>更换端口号为8080，node默认占用80端口，或者kill掉node服务<br>关闭nodejs 服务 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl stop nodejs.service</div></pre></td></tr></table></figure>
+<p>重新启动iotgo  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo PORT=&quot;8080&quot; DEBUG=&quot;iotgo&quot; ./bin/www</div></pre></td></tr></table></figure>
+<p>出现iotgo定制页面,have a fun !<br><img src="https://i.imgur.com/6nlbqA5.png" alt=""></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 物联网，Iotgo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[第二话 你跟着我]]></title>
       <url>/2017/10/15/2017-10-15-13-12%E8%80%B3%E8%AF%AD%E3%80%81%E4%B8%80%E4%B8%96%E5%8A%AB-02/</url>
       <content type="html"><![CDATA[<p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="0" height="0" src="//music.163.com/outchain/player?type=2&id=29572804&auto=1&height=66"></iframe><br><strong>她的微笑</strong>很温暖，像一片彩虹，在他的心里慢慢升起，从左心房到右心房，他听到了自己的心跳声，咚咚。她的微笑很纯净，就像一泓清水从山涧里流淌出来，那种纯净永远也汇不进江河里，要用手鞠起来，捧在手心，搁在最明亮的眼睛里。那一刻，陈家晖的世界里时间仿佛停止了。他觉得心内的孤独少了几分。</p>
