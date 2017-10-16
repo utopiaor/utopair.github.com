@@ -11,6 +11,7 @@
 <p>通信协议层支持HTTP Websocket，MQTT， CoAP  </p>
 <p>其基本架构如下图所示<br><img src="https://i.imgur.com/Ef0oKXC.png" alt=""></p>
 <hr>
+ <a id="more"></a> 
 <h1 id="服务器搭建"><a href="#服务器搭建" class="headerlink" title="服务器搭建"></a>服务器搭建</h1><h2 id="服务器环境"><a href="#服务器环境" class="headerlink" title="服务器环境"></a>服务器环境</h2><pre><code>主机：x86_64
 操作系统: Ubuntu 16.04.3 LTS xenial
 开发语言：html  javascript  python  go 
@@ -19,7 +20,7 @@ Web engine：nodejs
 NoSQL: mongoDB
 开发依赖工具: git npm bower forever
 </code></pre><h2 id="平台依赖环境安装"><a href="#平台依赖环境安装" class="headerlink" title="平台依赖环境安装"></a>平台依赖环境安装</h2><h3 id="NoSQL数据库mongoDB安装与配置"><a href="#NoSQL数据库mongoDB安装与配置" class="headerlink" title="NoSQL数据库mongoDB安装与配置"></a>NoSQL数据库mongoDB安装与配置</h3><ul>
-<li><p>从官网下载最新版本mongodb-linux-ubuntu 16.04 -x64.tar包，解压<br><a href="http://www.mongodb.org/downloads" target="_blank" rel="external">http://www.mongodb.org/downloads</a>  </p>
+<li><p>从官网下载最新版本mongodb-linux-ubuntu 16.04 -x64.tar包，解压<br><a href="http://www.mongodb.org/downloads" target="_blank" rel="external">http://www.mongodb.org/downloads</a>   </p>
 </li>
 <li><p>将解压后的文件复制到/usr/local/mongodb  </p>
 </li>
