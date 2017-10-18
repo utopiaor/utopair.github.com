@@ -15,18 +15,22 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords" content="hexo">
+<meta name="description" content="玩转树莓派树莓派系统配置与管理安装基本工具1sudo apt-get install -y git build-essential vim tmux curl ssh访问Tips  SSH disabled by default; can be enabled by creating a file with name “ssh” in boot partition意思是说创建一个名叫”ssh”的文">
+<meta name="keywords" content="玩转树莓派">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://utopiaor.github.io/2017/10/12/hello-world/index.html">
+<meta property="og:title" content="树莓派基本配置与管理">
+<meta property="og:url" content="http://utopiaor.github.io/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /index.html">
 <meta property="og:site_name" content="utopiaor">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="玩转树莓派树莓派系统配置与管理安装基本工具1sudo apt-get install -y git build-essential vim tmux curl ssh访问Tips  SSH disabled by default; can be enabled by creating a file with name “ssh” in boot partition意思是说创建一个名叫”ssh”的文">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-11T05:00:16.860Z">
+<meta property="og:image" content="https://i.imgur.com/uz81WeW.png">
+<meta property="og:image" content="https://i.imgur.com/pOBvgqq.png">
+<meta property="og:image" content="https://i.imgur.com/KQ7D9nc.png">
+<meta property="og:updated_time" content="2017-10-18T12:35:18.903Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="树莓派基本配置与管理">
+<meta name="twitter:description" content="玩转树莓派树莓派系统配置与管理安装基本工具1sudo apt-get install -y git build-essential vim tmux curl ssh访问Tips  SSH disabled by default; can be enabled by creating a file with name “ssh” in boot partition意思是说创建一个名叫”ssh”的文">
+<meta name="twitter:image" content="https://i.imgur.com/uz81WeW.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -58,7 +62,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Hello World | utopiaor</title>
+<title>树莓派基本配置与管理 | utopiaor</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -265,11 +269,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-2017-10-18-20-30树莓派基本配置与管理 " class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/10/12/hello-world/" class="article-date">
-      <time datetime="2017-10-11T17:37:34.348Z" itemprop="datePublished">2017-10-12</time>
+      <a href="/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /" class="article-date">
+      <time datetime="2017-10-18T12:30:36.000Z" itemprop="datePublished">2017-10-18</time>
 </a>
 
 
@@ -284,7 +288,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      树莓派基本配置与管理
     </h1>
   
 
@@ -299,7 +303,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/玩转树莓派/">玩转树莓派</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -309,15 +313,55 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派系统配置与管理"><a href="#树莓派系统配置与管理" class="headerlink" title="树莓派系统配置与管理"></a>树莓派系统配置与管理</h2><h3 id="安装基本工具"><a href="#安装基本工具" class="headerlink" title="安装基本工具"></a>安装基本工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install -y git build-essential vim tmux curl</div></pre></td></tr></table></figure>
+<h3 id="ssh访问"><a href="#ssh访问" class="headerlink" title="ssh访问"></a>ssh访问</h3><p><strong>Tips</strong></p>
+<blockquote>
+<p>SSH disabled by default; can be enabled by creating a file with name “ssh” in boot partition<br>意思是说创建一个名叫”ssh”的文件在boot分区,就是内存卡的根目录</p>
+</blockquote>
+<ul>
+<li>安装nmap端口扫描工具，扫描本网段ip,windows下可使用PortScan工具<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install nmap</div><div class="line">```  </div><div class="line">- 扫描raspberry ip  </div><div class="line">``` </div><div class="line">nmap -v -sn 192.168.0.1/10</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>Nmap scan report for 192.168.0.106<br>Host is up (0.055s latency).<br>All 1000 scanned ports on 192.168.0.106 are closed  </p>
+</blockquote>
+<p>扫描到树莓派的ip为192.168.0.106<br><strong>这种扫描方式很慢，可直接用arp -a查看 arp缓存表</strong></p>
+<ul>
+<li>登录ssh<br>linux下登录  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh pi@192.168.0.106</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>windows下登录，使用mobaxterm<br><img src="https://i.imgur.com/uz81WeW.png" alt="">  </p>
+<h3 id="vnc访问"><a href="#vnc访问" class="headerlink" title="vnc访问"></a>vnc访问</h3><ul>
+<li>安装vnc服务  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update  </div><div class="line">sudo apt-get install tightvncserver</div></pre></td></tr></table></figure>
+<ul>
+<li>启动vnc服务  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vncserver -depth 16 -geometry 800x600 :1</div></pre></td></tr></table></figure>
+<ul>
+<li>编写服务脚本  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">### BEGIN INIT INFO</div><div class="line"># Provides:          tightvncserver</div><div class="line"># Required-Start:    $local_fs</div><div class="line"># Required-Stop:     $local_fs</div><div class="line"># Default-Start:     2 3 4 5</div><div class="line"># Default-Stop:      0 1 6</div><div class="line"># Short-Description: Start/stop tightvncserver</div><div class="line">### END INIT INFO</div><div class="line"></div><div class="line"># More details see:</div><div class="line"># http://www.penguintutor.com/linux/tightvnc</div><div class="line"></div><div class="line">### Customize this entry</div><div class="line"># Set the USER variable to the name of the user to start tightvncserver under</div><div class="line">export USER=&apos;pi&apos;</div><div class="line">### End customization required</div><div class="line"></div><div class="line">eval cd ~$USER</div><div class="line"></div><div class="line">case &quot;$1&quot; in</div><div class="line">  start)</div><div class="line">    su $USER -c &apos;/usr/bin/tightvncserver -depth 16 -geometry 800x600 :1&apos;</div><div class="line">    echo &quot;Starting TightVNC server for $USER &quot;</div><div class="line">    ;;</div><div class="line">  stop)</div><div class="line">    su $USER -c &apos;/usr/bin/tightvncserver -kill :1&apos;</div><div class="line">    echo &quot;Tightvncserver stopped&quot;</div><div class="line">    ;;</div><div class="line">  *)</div><div class="line">    echo &quot;Usage: /etc/init.d/tightvncserver &#123;start|stop&#125;&quot;</div><div class="line">    exit 1</div><div class="line">    ;;</div><div class="line">esac</div><div class="line">exit 0</div></pre></td></tr></table></figure>
+<ul>
+<li><p>增加执行权限，并启动服务  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo chmod +x /etc/init.d/tightvncserver</div><div class="line">sudo update-rc.d tightvncserver defaults</div><div class="line">sudo /etc/init.d/tightvncserver stop</div><div class="line">sudo /etc/init.d/tightvncserver start</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装chkconfig， 并将vnc服务设为开机启动  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install chkconfig</div><div class="line">chkconfig --add tightvncserver</div><div class="line">chkconfig tightvncserver on</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>Tips</strong></p>
+<blockquote>
+<p>这里重新启动后，vncservice服务并没有启动，需要手动启动,具体原因未知<br>sudo /etc/init.d/tightvncserver</p>
+</blockquote>
+<ul>
+<li>客户端链接，使用mobaxterm的vnc客户端<br><img src="https://i.imgur.com/pOBvgqq.png" alt=""></li>
+</ul>
+<h3 id="远程桌面访问"><a href="#远程桌面访问" class="headerlink" title="远程桌面访问"></a>远程桌面访问</h3><p>安装xrdp服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install xrdp</div></pre></td></tr></table></figure></p>
+<p>安装过后便可以用windows下的远程桌面工具 mstsc访问了</p>
+<h3 id="raspi-config管理树莓派"><a href="#raspi-config管理树莓派" class="headerlink" title="raspi-config管理树莓派"></a>raspi-config管理树莓派</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo raspi-config</div></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/KQ7D9nc.png" alt=""><br>这里的配置工具里描述的比较详细，根据个人喜好和具体环境配置即可</p>
 
       
     </div>
@@ -326,13 +370,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/10/12/hello-world/">Hello World</a></p>
+        <p><span>本文标题:</span><a href="/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /">树莓派基本配置与管理</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">utopiaor</a></p>
-        <p><span>发布时间:</span>2017-10-12, 01:37:34</p>
-        <p><span>最后更新:</span>2017-10-11, 13:00:16</p>
+        <p><span>发布时间:</span>2017-10-18, 20:30:36</p>
+        <p><span>最后更新:</span>2017-10-18, 20:35:18</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/10/12/hello-world/" title="Hello World">http://utopiaor.github.io/2017/10/12/hello-world/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://utopiaor.github.io/2017/10/12/hello-world/　　作者: utopiaor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /" title="树莓派基本配置与管理">http://utopiaor.github.io/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /</a>
+            <span class="copy-path" data-clipboard-text="原文: http://utopiaor.github.io/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /　　作者: utopiaor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -344,16 +388,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/10/14/2017-10-14-14-40树莓派简介/">
-                    树莓派简介
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/10/12/test/">
-                    Test eaasy
+                <a href="/2017/10/16/2017-10-16-22-40基于Iotgo的物联网云端环境搭建/">
+                    基于Iotgo的物联网云端环境搭建
                 </a>
             </div>
         
@@ -365,7 +403,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#玩转树莓派"><span class="toc-number">1.</span> <span class="toc-text">玩转树莓派</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#树莓派系统配置与管理"><span class="toc-number">1.1.</span> <span class="toc-text">树莓派系统配置与管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装基本工具"><span class="toc-number">1.1.1.</span> <span class="toc-text">安装基本工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ssh访问"><span class="toc-number">1.1.2.</span> <span class="toc-text">ssh访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vnc访问"><span class="toc-number">1.1.3.</span> <span class="toc-text">vnc访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#远程桌面访问"><span class="toc-number">1.1.4.</span> <span class="toc-text">远程桌面访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#raspi-config管理树莓派"><span class="toc-number">1.1.5.</span> <span class="toc-text">raspi-config管理树莓派</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -409,15 +447,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/10/14/2017-10-14-14-40树莓派简介/" title="上一篇: 树莓派简介">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/10/12/test/" title="下一篇: Test eaasy">
+            <a href="/2017/10/16/2017-10-16-22-40基于Iotgo的物联网云端环境搭建/" title="下一篇: 基于Iotgo的物联网云端环境搭建">
                 <i class="fa fa-angle-right"></i>
             </a>
         

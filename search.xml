@@ -3,6 +3,75 @@
   
     
     <entry>
+      <title><![CDATA[树莓派基本配置与管理]]></title>
+      <url>/2017/10/18/2017-10-18-20-30%E6%A0%91%E8%8E%93%E6%B4%BE%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%A1%E7%90%86%20/</url>
+      <content type="html"><![CDATA[<h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派系统配置与管理"><a href="#树莓派系统配置与管理" class="headerlink" title="树莓派系统配置与管理"></a>树莓派系统配置与管理</h2><h3 id="安装基本工具"><a href="#安装基本工具" class="headerlink" title="安装基本工具"></a>安装基本工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install -y git build-essential vim tmux curl</div></pre></td></tr></table></figure>
+<h3 id="ssh访问"><a href="#ssh访问" class="headerlink" title="ssh访问"></a>ssh访问</h3><p><strong>Tips</strong></p>
+<blockquote>
+<p>SSH disabled by default; can be enabled by creating a file with name “ssh” in boot partition<br>意思是说创建一个名叫”ssh”的文件在boot分区,就是内存卡的根目录</p>
+</blockquote>
+<ul>
+<li>安装nmap端口扫描工具，扫描本网段ip,windows下可使用PortScan工具<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install nmap</div><div class="line">```  </div><div class="line">- 扫描raspberry ip  </div><div class="line">``` </div><div class="line">nmap -v -sn 192.168.0.1/10</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>Nmap scan report for 192.168.0.106<br>Host is up (0.055s latency).<br>All 1000 scanned ports on 192.168.0.106 are closed  </p>
+</blockquote>
+<p>扫描到树莓派的ip为192.168.0.106<br><strong>这种扫描方式很慢，可直接用arp -a查看 arp缓存表</strong></p>
+<ul>
+<li>登录ssh<br>linux下登录  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh pi@192.168.0.106</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>windows下登录，使用mobaxterm<br><img src="https://i.imgur.com/uz81WeW.png" alt="">  </p>
+<h3 id="vnc访问"><a href="#vnc访问" class="headerlink" title="vnc访问"></a>vnc访问</h3><ul>
+<li>安装vnc服务  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update  </div><div class="line">sudo apt-get install tightvncserver</div></pre></td></tr></table></figure>
+<ul>
+<li>启动vnc服务  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vncserver -depth 16 -geometry 800x600 :1</div></pre></td></tr></table></figure>
+<ul>
+<li>编写服务脚本  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">### BEGIN INIT INFO</div><div class="line"># Provides:          tightvncserver</div><div class="line"># Required-Start:    $local_fs</div><div class="line"># Required-Stop:     $local_fs</div><div class="line"># Default-Start:     2 3 4 5</div><div class="line"># Default-Stop:      0 1 6</div><div class="line"># Short-Description: Start/stop tightvncserver</div><div class="line">### END INIT INFO</div><div class="line"></div><div class="line"># More details see:</div><div class="line"># http://www.penguintutor.com/linux/tightvnc</div><div class="line"></div><div class="line">### Customize this entry</div><div class="line"># Set the USER variable to the name of the user to start tightvncserver under</div><div class="line">export USER=&apos;pi&apos;</div><div class="line">### End customization required</div><div class="line"></div><div class="line">eval cd ~$USER</div><div class="line"></div><div class="line">case &quot;$1&quot; in</div><div class="line">  start)</div><div class="line">    su $USER -c &apos;/usr/bin/tightvncserver -depth 16 -geometry 800x600 :1&apos;</div><div class="line">    echo &quot;Starting TightVNC server for $USER &quot;</div><div class="line">    ;;</div><div class="line">  stop)</div><div class="line">    su $USER -c &apos;/usr/bin/tightvncserver -kill :1&apos;</div><div class="line">    echo &quot;Tightvncserver stopped&quot;</div><div class="line">    ;;</div><div class="line">  *)</div><div class="line">    echo &quot;Usage: /etc/init.d/tightvncserver &#123;start|stop&#125;&quot;</div><div class="line">    exit 1</div><div class="line">    ;;</div><div class="line">esac</div><div class="line">exit 0</div></pre></td></tr></table></figure>
+<ul>
+<li><p>增加执行权限，并启动服务  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo chmod +x /etc/init.d/tightvncserver</div><div class="line">sudo update-rc.d tightvncserver defaults</div><div class="line">sudo /etc/init.d/tightvncserver stop</div><div class="line">sudo /etc/init.d/tightvncserver start</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装chkconfig， 并将vnc服务设为开机启动  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install chkconfig</div><div class="line">chkconfig --add tightvncserver</div><div class="line">chkconfig tightvncserver on</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>Tips</strong></p>
+<blockquote>
+<p>这里重新启动后，vncservice服务并没有启动，需要手动启动,具体原因未知<br>sudo /etc/init.d/tightvncserver</p>
+</blockquote>
+<ul>
+<li>客户端链接，使用mobaxterm的vnc客户端<br><img src="https://i.imgur.com/pOBvgqq.png" alt=""></li>
+</ul>
+<h3 id="远程桌面访问"><a href="#远程桌面访问" class="headerlink" title="远程桌面访问"></a>远程桌面访问</h3><p>安装xrdp服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install xrdp</div></pre></td></tr></table></figure></p>
+<p>安装过后便可以用windows下的远程桌面工具 mstsc访问了</p>
+<h3 id="raspi-config管理树莓派"><a href="#raspi-config管理树莓派" class="headerlink" title="raspi-config管理树莓派"></a>raspi-config管理树莓派</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo raspi-config</div></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/KQ7D9nc.png" alt=""><br>这里的配置工具里描述的比较详细，根据个人喜好和具体环境配置即可</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 玩转树莓派 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[基于Iotgo的物联网云端环境搭建]]></title>
       <url>/2017/10/16/2017-10-16-22-40%E5%9F%BA%E4%BA%8EIotgo%E7%9A%84%E7%89%A9%E8%81%94%E7%BD%91%E4%BA%91%E7%AB%AF%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
       <content type="html"><![CDATA[<h1 id="Iotgo平台简介"><a href="#Iotgo平台简介" class="headerlink" title="Iotgo平台简介"></a>Iotgo平台简介</h1><p>IoTgo项目的初衷是想让用户可以像部署zencart搭建博客，安装 phpbb创建论坛一样，通过部署IoTgo建立自己的云端服务器,服务器不仅仅是接口开放，而是全部代码开源</p>

@@ -270,6 +270,118 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-2017-10-18-20-30树莓派基本配置与管理 " class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /" class="article-date">
+      <time datetime="2017-10-18T12:30:36.000Z" itemprop="datePublished">2017-10-18</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /">树莓派基本配置与管理</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派系统配置与管理"><a href="#树莓派系统配置与管理" class="headerlink" title="树莓派系统配置与管理"></a>树莓派系统配置与管理</h2><h3 id="安装基本工具"><a href="#安装基本工具" class="headerlink" title="安装基本工具"></a>安装基本工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install -y git build-essential vim tmux curl</div></pre></td></tr></table></figure>
+<h3 id="ssh访问"><a href="#ssh访问" class="headerlink" title="ssh访问"></a>ssh访问</h3><p><strong>Tips</strong></p>
+<blockquote>
+<p>SSH disabled by default; can be enabled by creating a file with name “ssh” in boot partition<br>意思是说创建一个名叫”ssh”的文件在boot分区,就是内存卡的根目录</p>
+</blockquote>
+<ul>
+<li>安装nmap端口扫描工具，扫描本网段ip,windows下可使用PortScan工具<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install nmap</div><div class="line">```  </div><div class="line">- 扫描raspberry ip  </div><div class="line">``` </div><div class="line">nmap -v -sn 192.168.0.1/10</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>Nmap scan report for 192.168.0.106<br>Host is up (0.055s latency).<br>All 1000 scanned ports on 192.168.0.106 are closed  </p>
+</blockquote>
+<p>扫描到树莓派的ip为192.168.0.106<br><strong>这种扫描方式很慢，可直接用arp -a查看 arp缓存表</strong></p>
+<ul>
+<li>登录ssh<br>linux下登录  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh pi@192.168.0.106</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>windows下登录，使用mobaxterm<br><img src="https://i.imgur.com/uz81WeW.png" alt="">  </p>
+<h3 id="vnc访问"><a href="#vnc访问" class="headerlink" title="vnc访问"></a>vnc访问</h3><ul>
+<li>安装vnc服务  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update  </div><div class="line">sudo apt-get install tightvncserver</div></pre></td></tr></table></figure>
+<ul>
+<li>启动vnc服务  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vncserver -depth 16 -geometry 800x600 :1</div></pre></td></tr></table></figure>
+<ul>
+<li>编写服务脚本  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">### BEGIN INIT INFO</div><div class="line"># Provides:          tightvncserver</div><div class="line"># Required-Start:    $local_fs</div><div class="line"># Required-Stop:     $local_fs</div><div class="line"># Default-Start:     2 3 4 5</div><div class="line"># Default-Stop:      0 1 6</div><div class="line"># Short-Description: Start/stop tightvncserver</div><div class="line">### END INIT INFO</div><div class="line"></div><div class="line"># More details see:</div><div class="line"># http://www.penguintutor.com/linux/tightvnc</div><div class="line"></div><div class="line">### Customize this entry</div><div class="line"># Set the USER variable to the name of the user to start tightvncserver under</div><div class="line">export USER=&apos;pi&apos;</div><div class="line">### End customization required</div><div class="line"></div><div class="line">eval cd ~$USER</div><div class="line"></div><div class="line">case &quot;$1&quot; in</div><div class="line">  start)</div><div class="line">    su $USER -c &apos;/usr/bin/tightvncserver -depth 16 -geometry 800x600 :1&apos;</div><div class="line">    echo &quot;Starting TightVNC server for $USER &quot;</div><div class="line">    ;;</div><div class="line">  stop)</div><div class="line">    su $USER -c &apos;/usr/bin/tightvncserver -kill :1&apos;</div><div class="line">    echo &quot;Tightvncserver stopped&quot;</div><div class="line">    ;;</div><div class="line">  *)</div><div class="line">    echo &quot;Usage: /etc/init.d/tightvncserver &#123;start|stop&#125;&quot;</div><div class="line">    exit 1</div><div class="line">    ;;</div><div class="line">esac</div><div class="line">exit 0</div></pre></td></tr></table></figure>
+<ul>
+<li><p>增加执行权限，并启动服务  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo chmod +x /etc/init.d/tightvncserver</div><div class="line">sudo update-rc.d tightvncserver defaults</div><div class="line">sudo /etc/init.d/tightvncserver stop</div><div class="line">sudo /etc/init.d/tightvncserver start</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装chkconfig， 并将vnc服务设为开机启动  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install chkconfig</div><div class="line">chkconfig --add tightvncserver</div><div class="line">chkconfig tightvncserver on</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>Tips</strong></p>
+<blockquote>
+<p>这里重新启动后，vncservice服务并没有启动，需要手动启动,具体原因未知<br>sudo /etc/init.d/tightvncserver</p>
+</blockquote>
+<ul>
+<li>客户端链接，使用mobaxterm的vnc客户端<br><img src="https://i.imgur.com/pOBvgqq.png" alt=""></li>
+</ul>
+<h3 id="远程桌面访问"><a href="#远程桌面访问" class="headerlink" title="远程桌面访问"></a>远程桌面访问</h3><p>安装xrdp服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install xrdp</div></pre></td></tr></table></figure></p>
+<p>安装过后便可以用windows下的远程桌面工具 mstsc访问了</p>
+<h3 id="raspi-config管理树莓派"><a href="#raspi-config管理树莓派" class="headerlink" title="raspi-config管理树莓派"></a>raspi-config管理树莓派</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo raspi-config</div></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/KQ7D9nc.png" alt=""><br>这里的配置工具里描述的比较详细，根据个人喜好和具体环境配置即可</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/玩转树莓派/">玩转树莓派</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-2017-10-16-22-40基于Iotgo的物联网云端环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
