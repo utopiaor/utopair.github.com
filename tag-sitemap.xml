@@ -2,13 +2,6 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://utopiaor.github.io/tags/hexo/</loc>
-        <lastmod>2017-10-11T05:00:16.860Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://utopiaor.github.io/tags/%E8%80%B3%E8%AF%AD%E3%80%81%E4%B8%80%E4%B8%96%E5%8A%AB/</loc>
         <lastmod>2017-10-15T08:33:23.377Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -38,7 +31,14 @@
 
     <url>
         <loc>http://utopiaor.github.io/tags/%E7%8E%A9%E8%BD%AC%E6%A0%91%E8%8E%93%E6%B4%BE/</loc>
-        <lastmod>2017-10-20T12:29:52.170Z</lastmod>
+        <lastmod>2017-10-20T15:56:25.813Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://utopiaor.github.io/tags/hexo/</loc>
+        <lastmod>2017-10-20T15:56:39.867Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

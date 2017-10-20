@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://i.imgur.com/uz81WeW.png">
 <meta property="og:image" content="https://i.imgur.com/pOBvgqq.png">
 <meta property="og:image" content="https://i.imgur.com/KQ7D9nc.png">
-<meta property="og:updated_time" content="2017-10-18T12:35:18.903Z">
+<meta property="og:updated_time" content="2017-10-20T15:56:03.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树莓派基本配置与管理">
 <meta name="twitter:description" content="玩转树莓派树莓派系统配置与管理安装基本工具1sudo apt-get install -y git build-essential vim tmux curl ssh访问Tips  SSH disabled by default; can be enabled by creating a file with name “ssh” in boot partition意思是说创建一个名叫”ssh”的文">
@@ -316,13 +316,11 @@
         <h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派系统配置与管理"><a href="#树莓派系统配置与管理" class="headerlink" title="树莓派系统配置与管理"></a>树莓派系统配置与管理</h2><h3 id="安装基本工具"><a href="#安装基本工具" class="headerlink" title="安装基本工具"></a>安装基本工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install -y git build-essential vim tmux curl</div></pre></td></tr></table></figure>
 <h3 id="ssh访问"><a href="#ssh访问" class="headerlink" title="ssh访问"></a>ssh访问</h3><p><strong>Tips</strong></p>
 <blockquote>
-<p>SSH disabled by default; can be enabled by creating a file with name “ssh” in boot partition<br>意思是说创建一个名叫”ssh”的文件在boot分区,就是内存卡的根目录</p>
-</blockquote>
+<p>SSH disabled by default; can be enabled by creating a file with name “ssh” in boot partition<br>意思是说创建一个名叫”ssh”的文件在boot分区,就是内存卡的根目录<br> <a id="more"></a> </p>
 <ul>
 <li>安装nmap端口扫描工具，扫描本网段ip,windows下可使用PortScan工具<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install nmap</div><div class="line">```  </div><div class="line">- 扫描raspberry ip  </div><div class="line">``` </div><div class="line">nmap -v -sn 192.168.0.1/10</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<blockquote>
 <p>Nmap scan report for 192.168.0.106<br>Host is up (0.055s latency).<br>All 1000 scanned ports on 192.168.0.106 are closed  </p>
 </blockquote>
 <p>扫描到树莓派的ip为192.168.0.106<br><strong>这种扫描方式很慢，可直接用arp -a查看 arp缓存表</strong></p>
@@ -373,7 +371,7 @@
         <p><span>本文标题:</span><a href="/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /">树莓派基本配置与管理</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">utopiaor</a></p>
         <p><span>发布时间:</span>2017-10-18, 20:30:36</p>
-        <p><span>最后更新:</span>2017-10-18, 20:35:18</p>
+        <p><span>最后更新:</span>2017-10-20, 23:56:03</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /" title="树莓派基本配置与管理">http://utopiaor.github.io/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /</a>
             <span class="copy-path" data-clipboard-text="原文: http://utopiaor.github.io/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /　　作者: utopiaor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -396,8 +394,8 @@
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/10/18/2017-10-18-22-20树莓派网络配置/">
-                    树莓派基本配置与管理
+                <a href="/2017/10/16/2017-10-16-22-40基于Iotgo的物联网云端环境搭建/">
+                    基于Iotgo的物联网云端环境搭建
                 </a>
             </div>
         
@@ -461,13 +459,13 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/10/18/2017-10-18-22-20树莓派网络配置/" title="下一篇: 树莓派基本配置与管理">
+            <a href="/2017/10/16/2017-10-16-22-40基于Iotgo的物联网云端环境搭建/" title="下一篇: 基于Iotgo的物联网云端环境搭建">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/10/19/2017-10-19-21-30树莓派网络环境配置-wire+sta+ap/">树莓派网络环境配置(Wire+STA+AP)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /">树莓派基本配置与管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/2017-10-18-22-20树莓派网络配置/">树莓派基本配置与管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/2017-10-16-22-40基于Iotgo的物联网云端环境搭建/">基于Iotgo的物联网云端环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/2017-10-15-13-12耳语、一世劫-02/">第二话 你跟着我</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/2017-10-15-12-00树莓派安装/">树莓派系统安装与启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/14/2017-10-14-14-40树莓派简介/">树莓派简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/test/">Test eaasy</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/11/2017-10-11-18-46耳语、一世劫-01/">第一话 匆匆一眼</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/10/20/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/19/2017-10-19-21-30树莓派网络环境配置-wire+sta+ap/">树莓派网络环境配置(Wire+STA+AP)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /">树莓派基本配置与管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/2017-10-16-22-40基于Iotgo的物联网云端环境搭建/">基于Iotgo的物联网云端环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/2017-10-15-13-12耳语、一世劫-02/">第二话 你跟着我</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/2017-10-15-12-00树莓派安装/">树莓派系统安装与启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/14/2017-10-14-14-40树莓派简介/">树莓派简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/12/test/">Test eaasy</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/11/2017-10-11-18-46耳语、一世劫-01/">第一话 匆匆一眼</a></li></ul>
 
 
 

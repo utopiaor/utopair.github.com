@@ -270,6 +270,75 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/10/20/hello-world/" class="article-date">
+      <time datetime="2017-10-20T15:56:39.863Z" itemprop="datePublished">2017-10-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/20/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2017/10/20/hello-world/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-2017-10-19-21-30树莓派网络环境配置-wire+sta+ap" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -299,100 +368,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派网络配置"><a href="#树莓派网络配置" class="headerlink" title="树莓派网络配置"></a>树莓派网络配置</h2><p>raspberry pi不同系统版本的网络配置方法略有不同，需要阅读官方文档，针对具体的版本进行配置，<br>以下设置针对stretch版本，其他版本未作测试  </p>
+              <h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派网络配置"><a href="#树莓派网络配置" class="headerlink" title="树莓派网络配置"></a>树莓派网络配置</h2><p>raspberry pi不同系统版本的网络配置方法略有不同，需要阅读官方文档，针对具体的版本进行配置，<br>以下设置针对stretch版本，其他版本未作测试  </p>
 <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
 <li>有线接入公网</li>
 <li>无线wlan0 作为STA</li>
-<li>无线wlan1 作为AP，提供无线热点<h3 id="有线网络"><a href="#有线网络" class="headerlink" title="有线网络"></a>有线网络</h3>树莓派接入有线网络，默认DHCP获取地址，这里配置static ip，方便后续维护管理</li>
-<li>edit dhcpcd.conf</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/dhcpcd.conf</div></pre></td></tr></table></figure>
-<p>在文件末尾添加以下内容,重启树莓派即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#static IP configuration</div><div class="line">interface eth0</div><div class="line">static ip_address=192.168.0.105/24</div><div class="line">static routers=192.168.0.1</div><div class="line">static domain_name_servers=192.168.0.1</div></pre></td></tr></table></figure></p>
-<h3 id="无线网络"><a href="#无线网络" class="headerlink" title="无线网络"></a>无线网络</h3><ul>
-<li>USB无线网卡<br>由于树莓派2B没有板载无线芯片，这里使用usb wireless dongle来实现，推荐使用免驱的USB dongle，可在树莓派的USB dongle支持列表里查看<a href="https://elinux.org/RPi_USB_Wi-Fi_Adapters" target="_blank" rel="external">https://elinux.org/RPi_USB_Wi-Fi_Adapters</a><br>无线网卡均支持STA模式，AP模式是否支持可从<a href="https://wireless.wiki.kernel.org/en/users/drivers" target="_blank" rel="external">https://wireless.wiki.kernel.org/en/users/drivers</a>查看<br>将两张USB dongle 插入树莓派的USB端口，查看型号<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">pi@raspberrypi:~ $ lsusb</div><div class="line">Bus 001 Device 006: ID 0bda:8179 Realtek Semiconductor Corp. RTL8188EUS 802.11n Wireless Network Adapter</div><div class="line">Bus 001 Device 005: ID 258a:001a</div><div class="line">Bus 001 Device 007: ID 093a:2532 Pixart Imaging, Inc.</div><div class="line">Bus 001 Device 004: ID 0bda:8176 Realtek Semiconductor Corp. RTL8188CUS 802.11n WLAN Adapter</div><div class="line">Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter</div><div class="line">Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub</div><div class="line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>可见两款USB dongle的型号分别为RTL8188EUS和RTL8188CUS，都是RealTek的，官方文档表示该型号AP功能未测试，那么接下来我便实测一下<br><strong>Tips</strong></p>
-<blockquote>
-<p>树莓派在系统启动时会随机为无线网卡分配设备接口号，也就是两块USB Dongle的设备名 wlan0和wlan1会随机swap，但这并不影响使用</p>
-</blockquote>
-<h4 id="wlan0-STA设置"><a href="#wlan0-STA设置" class="headerlink" title="wlan0 STA设置"></a>wlan0 STA设置</h4><ul>
-<li><p>配置 /etc/network/interfaces<br>在改文件里添加以下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">allow-hotplug wlan0</div><div class="line">iface wlan0 inet manual</div><div class="line">pre-up wpa_supplicant -B w -D wext -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf</div><div class="line">post-down killall -q wpa_supplicant</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置 /etc/wpa_supplicant/wpa_supplicant.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">country=GB</div><div class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</div><div class="line">update_config=1</div><div class="line"></div><div class="line">network=&#123;</div><div class="line">    ssid=&quot;xxxxxx&quot;</div><div class="line">    psk=&quot;xxxxxx&quot;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>其中ssid和psk分别表示无线网络名称和密码</p>
-<ul>
-<li><p>配置 /etc/dhcpcd.conf<br>在文件末尾添加以下内容  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">interface wlan0</div><div class="line">static ip_address=192.168.0.116/24</div><div class="line">static routers=192.168.0.1</div><div class="line">static domain_name_servers=192.168.0.1</div></pre></td></tr></table></figure>
-</li>
-<li><p>重启树莓派，查看wlan0接入网络是否成功</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">pi@raspberrypi:~ $ ifconfig wlan0</div><div class="line">wlan0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</div><div class="line">        inet 192.168.0.116  netmask 255.255.255.0  broadcast 192.168.0.255</div><div class="line">        inet6 fe80::b80e:3e12:3882:fa4d  prefixlen 64  scopeid 0x20&lt;link&gt;</div><div class="line">        ether 00:13:ef:81:00:0b  txqueuelen 1000  (Ethernet)</div><div class="line">        RX packets 3064  bytes 524906 (512.6 KiB)</div><div class="line">        RX errors 0  dropped 44  overruns 0  frame 0</div><div class="line">        TX packets 46  bytes 6094 (5.9 KiB)</div><div class="line">        TX errors 0  dropped 3 overruns 0  carrier 0  collisions 0</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>可见wlan0已经分配地址192.168.0.116，wlan0作为STA设置完成  </p>
-<h4 id="wlan1-AP设置"><a href="#wlan1-AP设置" class="headerlink" title="wlan1 AP设置"></a>wlan1 AP设置</h4><ul>
-<li><p>准备工作<br>安装需要的软件包<br>hostapd—支持无线网卡作为无线热点使用<br>dnsmasq— 提供DHCP和DNS服务  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install hostapd dnsmasq</div></pre></td></tr></table></figure>
-</li>
-<li><p>修改/etc/dhcpcd.conf<br>禁止wlan1 DHCP功能，将其修改为静态ip地址，这个地址将做为后续我们wifi热点的网关地址<br>在/etc/dhcpcd.conf末尾添加以下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">interface wlan1</div><div class="line">static ip_address=192.168.2.1/24</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置 /etc/network/interfaces<br>在文件结尾添加以下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">allow-hotplug wlan1</div><div class="line">iface wlan1 inet manual</div></pre></td></tr></table></figure>
-</li>
-<li><p>重启dhcp服务和wlan1无线网卡配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo service dhcpcd restart</div><div class="line">sudo ifdown wlan1</div><div class="line">sudo ifup   wlan</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置hostapd</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">sudo vim etc/hostapd/hostapd.conf</div><div class="line"></div><div class="line">interface=wlan1</div><div class="line">driver=nl80211</div><div class="line">ssid=TP-LINK_1112_hot</div><div class="line">hw_mode=g</div><div class="line">channel=6</div><div class="line">wmm_enabled=1</div><div class="line">macaddr_acl=0</div><div class="line">auth_algs=1</div><div class="line">ignore_broadcast_ssid=0</div><div class="line">wpa=2</div><div class="line">wpa_passphrase=asdfghjkl_123</div><div class="line">wpa_key_mgmt=WPA-PSK</div><div class="line">rsn_pairwise=CCMP</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>运行以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo /usr/sbin/hostapd /etc/hostapd/hostapd.conf</div><div class="line"></div><div class="line">Configuration file: /etc/hostapd/hostapd.conf</div><div class="line">Using interface wlan1 with hwaddr 00:13:ef:62:0b:ef and ssid &quot;TP-LINK_1112_hot&quot;</div><div class="line">wlan1: interface state UNINITIALIZED-&gt;ENABLED</div><div class="line">wlan1: AP-ENABLED</div></pre></td></tr></table></figure></p>
-<p>wlan1: AP-ENABLED表明配置成功  </p>
-<p>配置hostapd为自启动模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/default/hostapd</div></pre></td></tr></table></figure></p>
-<p>将DAEMON_CONF 修改为DAEMON_CONF=”/etc/hostapd/hostapd.conf”</p>
-<ul>
-<li><p>配置DNSMASQ<br>为了实现上网功能，需要对DNSMASQ服务进行配置，首先备份一下系统默认的文件，然后创建一个新的配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">sudo mv /etc/dnsmasq.conf/etc/bak_dnsmasq.conf</div><div class="line">sudo vim /etc/dnsmasq.conf</div><div class="line"></div><div class="line">interface=wlan0</div><div class="line"></div><div class="line">bind-interfaces</div><div class="line"></div><div class="line">server=218.2.2.2</div><div class="line"></div><div class="line">server=114.114.114.114</div><div class="line"></div><div class="line">server=8.8.8.8</div><div class="line"></div><div class="line">domain-needed</div><div class="line"></div><div class="line">bogus-priv</div><div class="line"></div><div class="line">dhcp-range=192.168.2.2,192.168.2.254,12h</div></pre></td></tr></table></figure>
-</li>
-<li><p>设置IPV4内核转发<br>打开系统配置文件sysctl.conf,将IPV4转发那一行的#去掉  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">net.ipv4.ip_forward=1</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>下一次重启后会生效，如果不想现在重启，可以直接输入如下指令直接生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo sh -c &quot;echo 1 &gt;/proc/sys/net/ipv4/ip_forward&quot;</div></pre></td></tr></table></figure></p>
-<ul>
-<li>防火墙设置<br>为了实现树莓派以太网接口共享给wlan1上网，需要配置NAT，需先执行如下防火墙命令  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo iptables -F</div><div class="line">sudo iptables -X</div><div class="line">sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</div><div class="line">sudo iptables -A FORWARD -i eth0 -o wlan1 -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">sudo iptables -A FORWARD -i wlan1 -o eth0 -j ACCEPT</div><div class="line">sudo bash -c iptables-save &gt; /etc/etc/iptables.ipv4.nat</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>编辑sudo vim /etc/network/if-pre-up.d/iptables<br>添加下面两行代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">/sbin/iptables-restore &lt; /etc/iptables.ipv4.nat</div></pre></td></tr></table></figure></p>
-<p>sudo chmod 755 /etc/network/if-pre-up.d/iptables</p>
-<ul>
-<li><p>通过获取DHCPCD来运行NAT需要创建一个新文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo touch /lib/dhcpcd/dhcpcd-hooks/70-ipv4-nat</div></pre></td></tr></table></figure>
-</li>
-<li><p>重启服务：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo service hostapd start</div><div class="line">sudo service dnsmasq start</div><div class="line">sudo reboot</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>重启树莓派后，输入ifconfig，得到以下结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">pi@raspberrypi:~ $ ifconfig</div><div class="line">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</div><div class="line">        inet 192.168.0.106  netmask 255.255.255.0  broadcast 192.168.0.255</div><div class="line">        inet6 fe80::216c:c891:56cf:67  prefixlen 64  scopeid 0x20&lt;link&gt;</div><div class="line">        ether b8:27:eb:b3:69:7e  txqueuelen 1000  (Ethernet)</div><div class="line">        RX packets 69  bytes 6676 (6.5 KiB)</div><div class="line">        RX errors 0  dropped 1  overruns 0  frame 0</div><div class="line">        TX packets 199  bytes 34379 (33.5 KiB)</div><div class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</div><div class="line"></div><div class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</div><div class="line">        inet 127.0.0.1  netmask 255.0.0.0</div><div class="line">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;</div><div class="line">        loop  txqueuelen 1  (Local Loopback)</div><div class="line">        RX packets 36  bytes 5308 (5.1 KiB)</div><div class="line">        RX errors 0  dropped 0  overruns 0  frame 0</div><div class="line">        TX packets 36  bytes 5308 (5.1 KiB)</div><div class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</div><div class="line"></div><div class="line">wlan0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</div><div class="line">        inet 192.168.0.116  netmask 255.255.255.0  broadcast 192.168.0.255</div><div class="line">        inet6 fe80::b80e:3e12:3882:fa4d  prefixlen 64  scopeid 0x20&lt;link&gt;</div><div class="line">        ether 00:13:ef:81:00:0b  txqueuelen 1000  (Ethernet)</div><div class="line">        RX packets 281  bytes 46958 (45.8 KiB)</div><div class="line">        RX errors 0  dropped 445  overruns 0  frame 0</div><div class="line">        TX packets 45  bytes 6194 (6.0 KiB)</div><div class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</div><div class="line"></div><div class="line">wlan1: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</div><div class="line">        inet 192.168.2.1  netmask 255.255.255.0  broadcast 192.168.2.255</div><div class="line">        inet6 fe80::f6ba:c0c:8aa6:1285  prefixlen 64  scopeid 0x20&lt;link&gt;</div><div class="line">        ether 00:13:ef:62:0b:ef  txqueuelen 1000  (Ethernet)</div><div class="line">        RX packets 113  bytes 7493 (7.3 KiB)</div><div class="line">        RX errors 0  dropped 0  overruns 0  frame 0</div><div class="line">        TX packets 32  bytes 3980 (3.8 KiB)</div><div class="line">        TX errors 0  dropped 5 overruns 0  carrier 0  collisions 0</div></pre></td></tr></table></figure></p>
-<p>eth0 wlan0 wlan1均已正常工作，good job！</p>
-<p>但是用手机搜索热点，并没有找到SSID 为TP-LINK_1112_hot一项<br>查看进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ps -aux | grep hostapd</div><div class="line"></div><div class="line">root       444  0.0  0.1   6168  1868 ?        Ss   00:12   0:00 /usr/sbin/hostapd -B -P /run/hostapd.pid /etc/hostapd/hostapd.conf</div><div class="line">pi         959  0.0  0.0   6200   564 pts/0    S+   00:18   0:00 grep --color=auto hostapd</div></pre></td></tr></table></figure></p>
-<p>hostapd已经启动，重启试试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo /usr/sbin/hostapd /etc/hostapd/hostapd.conf</div><div class="line"></div><div class="line">Configuration file: /etc/hostapd/hostapd.conf</div><div class="line">Using interface wlan1 with hwaddr 00:13:ef:62:0b:ef and ssid &quot;TP-LINK_1112_hot&quot;</div><div class="line">wlan1: interface state UNINITIALIZED-&gt;ENABLED</div><div class="line">wlan1: AP-ENABLED</div></pre></td></tr></table></figure></p>
-<p>重启后手机可以搜索到这个热点，但是拿不到ip<br>ps查看是未启动dnsmasq服务<br>重启dnsmasq<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service dnsmasq start</div></pre></td></tr></table></figure></p>
-<p>现在手机可以连接到热点了，但是上不了网  </p>
-<p>重新配置防火墙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sudo iptables -F</div><div class="line">sudo iptables -X</div><div class="line">sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</div><div class="line">sudo iptables -A FORWARD -i eth0 -o wlan1 -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">sudo iptables -A FORWARD -i wlan1 -o eth0 -j ACCEPT</div></pre></td></tr></table></figure></p>
-<p>现在手机终于可以上网了</p>
-<p>可以写个脚本，将这三项需要手动启动的项目开机自动启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">sudo vim startHot.sh</div><div class="line"></div><div class="line">#!/bin/sh</div><div class="line">iptables -F</div><div class="line">iptables -X</div><div class="line">iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</div><div class="line">iptables -A FORWARD -i eth0 -o wlan1 -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">iptables -A FORWARD -i wlan1 -o eth0 -j ACCEPT</div><div class="line"></div><div class="line">service dnsmasq start</div><div class="line"></div><div class="line">/usr/sbin/hostapd /etc/hostapd/hostapd.conf</div></pre></td></tr></table></figure></p>
-<p>编写开机自启脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">#BEGIN INIT INFO</div><div class="line"># Provides:          tightvncserver</div><div class="line"># Required-Start:    $local_fs</div><div class="line"># Required-Stop:     $local_fs</div><div class="line"># Default-Start:     2 3 4 5</div><div class="line"># Default-Stop:      0 1 6</div><div class="line"># Short-Description: Start/stop tightvncserver</div><div class="line">### END INIT INFO</div><div class="line"></div><div class="line"># More details see:</div><div class="line"># http://www.penguintutor.com/linux/tightvnc</div><div class="line"></div><div class="line">### Customize this entry</div><div class="line"># Set the USER variable to the name of the user to start tightvncserver under</div><div class="line">export USER=&apos;pi&apos;</div><div class="line">### End customization required</div><div class="line"></div><div class="line">eval cd ~$USER</div><div class="line"></div><div class="line">case &quot;$1&quot; in</div><div class="line">  start)</div><div class="line">    su $USER -c &apos;/etc/init.d/startHot &gt;/dev/null&apos;</div><div class="line">    echo &quot;Starting hotserver server for $USER &quot;</div><div class="line">    ;;</div><div class="line">  stop)</div><div class="line">    su $USER -c &apos;/etc/init.d/startHot -kill :1&apos;</div><div class="line">    echo &quot;hotserver stopped&quot;</div><div class="line">    ;;</div><div class="line">  *)</div><div class="line">    echo &quot;Usage: /etc/init.d/hotserver &#123;start|stop&#125;&quot;</div><div class="line">    exit 1</div><div class="line">    ;;</div><div class="line">esac</div><div class="line">exit 0</div></pre></td></tr></table></figure></p>
-<p>注册开机启动<br><code>sudo update-rc.d hotserver defaults</code></p>
-<p>可是重启后并没有启动，应该是树莓派使用systemctl这种新型的服务启动方式了，暂时不折腾了<br>直接手动启动脚本吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo startHot &gt;/dev/null 2&amp;&gt;1 &amp;</div></pre></td></tr></table></figure></p>
-<p>OK,热点已经启动，手机连接可以正常上网。</p>
-<p>这里使用eth0-&gt;wlan1转发的，也可以配置防火墙，让wlan0-&gt;wlan1转发，就可以拔掉树莓派的网线啦！</p>
-
+<li>无线wlan1 作为AP，提供无线热点
+          
       
     </div>
     
@@ -409,6 +390,10 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/玩转树莓派/">玩转树莓派</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/2017/10/19/2017-10-19-21-30树莓派网络环境配置-wire+sta+ap/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -455,127 +440,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派系统配置与管理"><a href="#树莓派系统配置与管理" class="headerlink" title="树莓派系统配置与管理"></a>树莓派系统配置与管理</h2><h3 id="安装基本工具"><a href="#安装基本工具" class="headerlink" title="安装基本工具"></a>安装基本工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install -y git build-essential vim tmux curl</div></pre></td></tr></table></figure>
+              <h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派系统配置与管理"><a href="#树莓派系统配置与管理" class="headerlink" title="树莓派系统配置与管理"></a>树莓派系统配置与管理</h2><h3 id="安装基本工具"><a href="#安装基本工具" class="headerlink" title="安装基本工具"></a>安装基本工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install -y git build-essential vim tmux curl</div></pre></td></tr></table></figure>
 <h3 id="ssh访问"><a href="#ssh访问" class="headerlink" title="ssh访问"></a>ssh访问</h3><p><strong>Tips</strong></p>
 <blockquote>
-<p>SSH disabled by default; can be enabled by creating a file with name “ssh” in boot partition<br>意思是说创建一个名叫”ssh”的文件在boot分区,就是内存卡的根目录</p>
-</blockquote>
-<ul>
-<li>安装nmap端口扫描工具，扫描本网段ip,windows下可使用PortScan工具<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install nmap</div><div class="line">```  </div><div class="line">- 扫描raspberry ip  </div><div class="line">``` </div><div class="line">nmap -v -sn 192.168.0.1/10</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<blockquote>
-<p>Nmap scan report for 192.168.0.106<br>Host is up (0.055s latency).<br>All 1000 scanned ports on 192.168.0.106 are closed  </p>
-</blockquote>
-<p>扫描到树莓派的ip为192.168.0.106<br><strong>这种扫描方式很慢，可直接用arp -a查看 arp缓存表</strong></p>
-<ul>
-<li>登录ssh<br>linux下登录  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh pi@192.168.0.106</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>windows下登录，使用mobaxterm<br><img src="https://i.imgur.com/uz81WeW.png" alt="">  </p>
-<h3 id="vnc访问"><a href="#vnc访问" class="headerlink" title="vnc访问"></a>vnc访问</h3><ul>
-<li>安装vnc服务  </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update  </div><div class="line">sudo apt-get install tightvncserver</div></pre></td></tr></table></figure>
-<ul>
-<li>启动vnc服务  </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vncserver -depth 16 -geometry 800x600 :1</div></pre></td></tr></table></figure>
-<ul>
-<li>编写服务脚本  </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">### BEGIN INIT INFO</div><div class="line"># Provides:          tightvncserver</div><div class="line"># Required-Start:    $local_fs</div><div class="line"># Required-Stop:     $local_fs</div><div class="line"># Default-Start:     2 3 4 5</div><div class="line"># Default-Stop:      0 1 6</div><div class="line"># Short-Description: Start/stop tightvncserver</div><div class="line">### END INIT INFO</div><div class="line"></div><div class="line"># More details see:</div><div class="line"># http://www.penguintutor.com/linux/tightvnc</div><div class="line"></div><div class="line">### Customize this entry</div><div class="line"># Set the USER variable to the name of the user to start tightvncserver under</div><div class="line">export USER=&apos;pi&apos;</div><div class="line">### End customization required</div><div class="line"></div><div class="line">eval cd ~$USER</div><div class="line"></div><div class="line">case &quot;$1&quot; in</div><div class="line">  start)</div><div class="line">    su $USER -c &apos;/usr/bin/tightvncserver -depth 16 -geometry 800x600 :1&apos;</div><div class="line">    echo &quot;Starting TightVNC server for $USER &quot;</div><div class="line">    ;;</div><div class="line">  stop)</div><div class="line">    su $USER -c &apos;/usr/bin/tightvncserver -kill :1&apos;</div><div class="line">    echo &quot;Tightvncserver stopped&quot;</div><div class="line">    ;;</div><div class="line">  *)</div><div class="line">    echo &quot;Usage: /etc/init.d/tightvncserver &#123;start|stop&#125;&quot;</div><div class="line">    exit 1</div><div class="line">    ;;</div><div class="line">esac</div><div class="line">exit 0</div></pre></td></tr></table></figure>
-<ul>
-<li><p>增加执行权限，并启动服务  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo chmod +x /etc/init.d/tightvncserver</div><div class="line">sudo update-rc.d tightvncserver defaults</div><div class="line">sudo /etc/init.d/tightvncserver stop</div><div class="line">sudo /etc/init.d/tightvncserver start</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装chkconfig， 并将vnc服务设为开机启动  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install chkconfig</div><div class="line">chkconfig --add tightvncserver</div><div class="line">chkconfig tightvncserver on</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>Tips</strong></p>
-<blockquote>
-<p>这里重新启动后，vncservice服务并没有启动，需要手动启动,具体原因未知<br>sudo /etc/init.d/tightvncserver</p>
-</blockquote>
-<ul>
-<li>客户端链接，使用mobaxterm的vnc客户端<br><img src="https://i.imgur.com/pOBvgqq.png" alt=""></li>
-</ul>
-<h3 id="远程桌面访问"><a href="#远程桌面访问" class="headerlink" title="远程桌面访问"></a>远程桌面访问</h3><p>安装xrdp服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install xrdp</div></pre></td></tr></table></figure></p>
-<p>安装过后便可以用windows下的远程桌面工具 mstsc访问了</p>
-<h3 id="raspi-config管理树莓派"><a href="#raspi-config管理树莓派" class="headerlink" title="raspi-config管理树莓派"></a>raspi-config管理树莓派</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo raspi-config</div></pre></td></tr></table></figure>
-<p><img src="https://i.imgur.com/KQ7D9nc.png" alt=""><br>这里的配置工具里描述的比较详细，根据个人喜好和具体环境配置即可</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/技术/">技术</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/玩转树莓派/">玩转树莓派</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2017-10-18-22-20树莓派网络配置" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/10/18/2017-10-18-22-20树莓派网络配置/" class="article-date">
-      <time datetime="2017-10-18T12:30:36.000Z" itemprop="datePublished">2017-10-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/2017-10-18-22-20树莓派网络配置/">树莓派基本配置与管理</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+<p>SSH disabled by default; can be enabled by creating a file with name “ssh” in boot partition<br>意思是说创建一个名叫”ssh”的文件在boot分区,就是内存卡的根目录<br>
           
-        <h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派网络配置"><a href="#树莓派网络配置" class="headerlink" title="树莓派网络配置"></a>树莓派网络配置</h2><p>raspberry pi不同系统版本的网络配置方法略有不同，需要阅读官方文档，针对具体的版本进行配置，<br>以下设置针对stretch版本，其他版本未作测试</p>
-<h3 id="有线网络"><a href="#有线网络" class="headerlink" title="有线网络"></a>有线网络</h3><p>树莓派接入有线网络，默认DHCP获取地址，这里配置static ip，方便后续维护管理</p>
-<ul>
-<li>edit dhcpcd.conf with  </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /etc/dhcpcd.conf</div></pre></td></tr></table></figure>
-<p>在文件末尾添加以下内容,重启树莓派即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#static IP configuration</div><div class="line">interface eth0</div><div class="line">static ip_address=192.168.0.105/24</div><div class="line">static routers=192.168.0.1</div><div class="line">static domain_name_servers=192.168.0.1</div></pre></td></tr></table></figure></p>
-<h3 id="无线网络"><a href="#无线网络" class="headerlink" title="无线网络"></a>无线网络</h3><p>无线网络也是配置静态ip，步骤如下</p>
-
       
     </div>
     
@@ -592,6 +461,10 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/玩转树莓派/">玩转树莓派</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/2017/10/18/2017-10-18-20-30树莓派基本配置与管理 /#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -871,78 +744,6 @@
         <p class="article-more-link">
           <a href="/2017/10/14/2017-10-14-14-40树莓派简介/#more">阅读全文 >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/10/12/hello-world/" class="article-date">
-      <time datetime="2017-10-11T17:37:34.348Z" itemprop="datePublished">2017-10-12</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/12/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/技术/">技术</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-    </div>
-
       
       <div class="clearfix"></div>
     </div>
