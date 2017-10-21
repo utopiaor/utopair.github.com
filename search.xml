@@ -3,6 +3,66 @@
   
     
     <entry>
+      <title><![CDATA[树莓派硬件分析]]></title>
+      <url>/2017/10/21/2017-10-21-12-09%E6%A0%91%E8%8E%93%E6%B4%BE%E7%A1%AC%E4%BB%B6%E5%88%86%E6%9E%90%20/</url>
+      <content type="html"><![CDATA[<h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派硬件分析"><a href="#树莓派硬件分析" class="headerlink" title="树莓派硬件分析"></a>树莓派硬件分析</h2><p>众里寻他千百度，青天白夜荡谷歌，纵观整个网络，没有找到一篇详细介绍树莓派硬件设计的文章，不免唏嘘。树莓派作为一款开源卡片式电脑，基于Broadcom商业策略的考虑，硬件没有完全开源，可以理解，但是对于硬件已经开源的部分，很少人来分析、研究和扩展，我理解树莓派的生态在硬件层面上是有一定残缺的。<br>Anyway,树莓派作为一款“开源硬件”，其价值并不在于硬件的扩展性，而在于软件设计，Geek们利用树莓派开放的GPIO的硬件能力，构建起了庞大的软件生态，可以说，树莓派其实是一个基于硬件的软件开源平台。<br>下面，我简单分析下树莓派的硬件设计。</p>
+<h2 id="原理图及datasheet下载"><a href="#原理图及datasheet下载" class="headerlink" title="原理图及datasheet下载"></a>原理图及datasheet下载</h2><p>树莓派的第一手资料，当然要去github <a href="https://github.com/raspberrypi" target="_blank" rel="external">raspberry</a>官方镜像获取</p>
+<ul>
+<li>树莓派2B+原理图下载<br><a href="https://github.com/raspberrypi/documentation/blob/master/hardware/raspberrypi/schematics/README.md" target="_blank" rel="external">https://github.com/raspberrypi/documentation/blob/master/hardware/raspberrypi/schematics/README.md</a></li>
+<li>主芯片SOC BCM2836及ARM A7 datasheet下载<br>BCM2836 ARM-local peripherals<br><a href="https://github.com/raspberrypi/documentation/blob/master/hardware/raspberrypi/bcm2836/QA7_rev3.4.pdf" target="_blank" rel="external">https://github.com/raspberrypi/documentation/blob/master/hardware/raspberrypi/bcm2836/QA7_rev3.4.pdf</a><br>ARM A7核心<br>Cortex-A7 MPcore Processor Reference Manual<br><a href="https://developer.arm.com/docs/ddi0464/latest/preface" target="_blank" rel="external">https://developer.arm.com/docs/ddi0464/latest/preface</a><br>需要注册ARM官网的账号才能下载  </li>
+<li>网卡及串口芯片 LAN9514<br><a href="http://pdf1.alldatasheet.com/datasheet-pdf/view/347291/SMSC/LAN9514.html" target="_blank" rel="external">http://pdf1.alldatasheet.com/datasheet-pdf/view/347291/SMSC/LAN9514.html</a><a id="more"></a>
+<h2 id="简单电路分析"><a href="#简单电路分析" class="headerlink" title="简单电路分析"></a>简单电路分析</h2>本人不是做硬件开发的，这里只是简单分析下树莓派2B+的电路，一切以够用为原则<h3 id="实物图简单标注"><a href="#实物图简单标注" class="headerlink" title="实物图简单标注"></a>实物图简单标注</h3></li>
+<li>树莓派正面<br><img src="https://i.imgur.com/r4IV6Xo.png" alt=""><br>核心芯片为BCM2836，右边LAN9514为网卡及串口，Microchip公司生产的 LAN951x 是第一款工业的全集成、高速2.0 USB、高性能10/100M网络控制器，网卡接口及USB接口设计在了 LAN9154 的右边。USB供电系统旁边有三个转压芯片，这一部分区域是给系统提供4种电压。HDMI和音频是系统芯片内部的功能，主要按照数据手册里方式的进行连接。树莓派为双层板，正面布满系统需要的绝大部分元器件。</li>
+<li>树莓派反面<br><img src="https://i.imgur.com/sZiD2aI.png" alt=""><br>PCB 板反面右边是SD卡接口，中心是一个19.2MHZ的晶振，对应正面中心的 BCM2836芯片<h3 id="树莓派硬件整体分析"><a href="#树莓派硬件整体分析" class="headerlink" title="树莓派硬件整体分析"></a>树莓派硬件整体分析</h3><h4 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h4><img src="https://i.imgur.com/Fk60fIE.png" alt=""><br>主要部件包括： <blockquote>
+<p>ARMv7（主CPU，即Application Processor或AP）<br>博通独有的VideoCore IV（图像处理单元，即GPU）<br>只读ROM<br>一次性写入的OTP<br>512M SDRAM<br>控制核心secure core<br>集成的其它部件，如各种外设的controller等</p>
+</blockquote>
+</li>
+</ul>
+<p>其上电之初的整个过程完全由secure core控制<br>USB和ETH由BCM2836外接LAN9514驱动  </p>
+<h4 id="电源电路分析"><a href="#电源电路分析" class="headerlink" title="电源电路分析"></a>电源电路分析</h4><p>在raspberryPi 2B+电路中有多种电压，5V，3V3，1V8，5V_CORE，VDD_CORE，PLL_VDD，RUN，H5V（HDMI用），AUD_3V3(audio用)，电源电路很复杂，我这里只是在整体上作大致的分析</p>
+<ul>
+<li>从输入到稳压5V<br><img src="https://i.imgur.com/7ZwSfaw.png" alt=""><br>从供电的输入端MicoUSB可以看出，该接口只有1和5号引脚起到供电作用，其他引脚悬空，没有USB串口功能，后边接到F1（MF-MSMF250/X），是自恢复保险丝，<a href="http://pdf1.alldatasheet.com/datasheet-pdf/view/521154/BOURNS/MF-MSMF250-16X.html" target="_blank" rel="external">MSMF250/16</a>具体参数如下图所示：<br><img src="https://i.imgur.com/JswsbUu.png" alt=""><br>可以看到该保险丝最大耐压16V，持续通过电流高达2.5A，峰值电流为5A<br>Q3是续流二极管，有防反接作用<br><a href="http://pdf1.alldatasheet.com/datasheet-pdf/view/104137/PHILIPS/BCM857BS.html" target="_blank" rel="external">BCM857BS</a>是NXP的一款PNP型三极管，其基本功能是作差分放大，这里与D5瞬态抑制二极管（TVS管）SMJ5.0a实现5V稳压，BCM857BS引脚图如下：<br><img src="https://i.imgur.com/ztbOiAj.png" alt=""></li>
+<li>从5V稳压中分解出3V3和1V8<br><img src="https://i.imgur.com/f7c5rHu.png" alt=""><br>稳压后的5V电源接入PAM2306AYPKE芯片，PAM2306AYPKE为DC-DC开关稳压芯片，为树莓派CPU及外设提供1.8V和3.3V电压<br>PAM2306 datasheet中的典型设计如下<br><img src="https://i.imgur.com/cf8K7dE.png" alt=""><br>可见这里树莓派也是参考的典型设计  </li>
+<li>从5V分解出5V_Core、RUN和SDRAM_LDO_Enable<br><img src="https://i.imgur.com/GCnxBL4.png" alt=""><br>可以看出，这里电路是通过5V和DMG2305 PMOS管得到5V_CORE、SDRAM的LDO使能信号和CPU的RUN信号<br>1V8电压通过Q8(PNP管)与5V电压一起为DMG2305提供栅源电压，使得PMOS导通<br>以下是DMG2305 datasheet中关于芯片的功能描述<br><img src="https://i.imgur.com/NSG0NTB.png" alt=""><br>可以看出，这里主要是为了减小DS漏源阻抗以及提高电源转换效率，目的是为了匹配高速的SDRAM和CPU的对Power的需求</li>
+<li>5V_CORE通过NCP6343为SOC的I2C控制器提供初始化电平<br><img src="https://i.imgur.com/zCPlUQ4.png" alt=""><br><a href="https://www.onsemi.com/PowerSolutions/product.do?id=NCP6343&amp;pdf=Y" target="_blank" rel="external">NC6343</a>是降压芯片，datasheet中关于芯片的描述为<br><img src="https://i.imgur.com/tNpr95g.png" alt=""><br>可见，NCP6343是为ARM7 SMPCore中的I2C Memory提供动态电压<h4 id="BCM2836起振与供电"><a href="#BCM2836起振与供电" class="headerlink" title="BCM2836起振与供电"></a>BCM2836起振与供电</h4><img src="https://i.imgur.com/Pcm8qgS.png" alt=""><br>可以看出，BCM2836的供电电压是1V8并且要提供RUN电平，后面是19.2MHZ的晶振<h4 id="复位与指示灯电路"><a href="#复位与指示灯电路" class="headerlink" title="复位与指示灯电路"></a>复位与指示灯电路</h4><img src="https://i.imgur.com/bYixD5M.png" alt=""><br><a href="http://pdf1.alldatasheet.com/datasheet-pdf/view/337534/DIODES/APX803.html" target="_blank" rel="external">APX803</a>在系统上电的时候RST，这时候2号线输出低电平，3v3通过R5和R8分压到PWR_LOW_N,随后RST置位成高电平，从而在PWR_LOW_N产生一个电平跳变，为SOC提供复位<br>由于SOC启动后，PWR_LOW_N保持低电平，从而开启Q1（P-FET）点亮RED led<h4 id="Camera电路"><a href="#Camera电路" class="headerlink" title="Camera电路"></a>Camera电路</h4><img src="https://i.imgur.com/eFzRtSm.png" alt=""><br>引脚直接接到SOC的相应引脚上<h4 id="DSI接口LCD电路"><a href="#DSI接口LCD电路" class="headerlink" title="DSI接口LCD电路"></a>DSI接口LCD电路</h4><img src="https://i.imgur.com/SNl5Ra9.png" alt=""><br>同样，引脚直接接到SOC相应引脚上<h4 id="音频电路"><a href="#音频电路" class="headerlink" title="音频电路"></a>音频电路</h4><img src="https://i.imgur.com/2UQXTAx.png" alt=""><br>这里核心的器件是NC7WZ16，是个高速双向缓冲器，主要是为了提高PWM信号的转换速度，当PWM为高电平时，信号高速通过，当为低电平时，输入输出为高阻态，既有效传输了音频信号，由做到了信号的隔离<br>其他大量的电阻和电容，都是为了滤波，为输出提供高质量的数字信号<h4 id="HDMI接口电路"><a href="#HDMI接口电路" class="headerlink" title="HDMI接口电路"></a>HDMI接口电路</h4><img src="https://i.imgur.com/IgS0rQa.png" alt=""><br>HDMI接口的引脚也是直接接到SOC的相应引脚上，值得一提的是左边的供电电路<br>RT9741CGV为显示器高压驱动芯片，HDMI转VGA显示器的VGA转换线就是从这部分获取电能，也就是从BCM857BS 5V稳压这里汲取电流，因为供电电源最高能提供2.5A的电流，最高也就是12.5W的功率，单CPU、GPU和WiFi蓝牙以及DISPLAY接口的功率都已经很高了，如果HDMI转接器仍通过该板卡供电的话，板子估计会吃不消，这也是为什么一些童鞋使用HDMI转VGA转接板显示花屏或者根本不显示的原因，建议使用VGA显示器的童鞋们，最好使用自带供电的HDMI转接板。<h4 id="GPIO电路"><a href="#GPIO电路" class="headerlink" title="GPIO电路"></a>GPIO电路</h4><img src="https://i.imgur.com/6HJniOQ.png" alt=""><br>这里没什么好说的，BCM2836的GPIO直接接到板卡的GPIO引脚上，这里有个需要注意的地方，板卡上是没有GPIO0和GPIO1的，具体见原理图的tips说明<br><img src="https://i.imgur.com/Nvk197m.png" alt=""><br>意思是说GPIO0和GPIO1被设置成ID_SD和ID_SC模式，在SOC上电时读取EEPROM的ID号，然后驱动GPIO的automagic 安装，具体要干嘛我也不知道，反正这两个GPIO不要使用就可以了<br>GPIO的电路虽然简单，但后续我们玩树莓派，主要就是利用这些GPIO的硬件能力，作为GPIO、I2C、SPI和UART等，了解下这些GPIO还是有必要的，这里附上一张树莓派GPIO的引脚对照图以备参考<br><img src="https://i.imgur.com/nEN4ayO.png" alt=""></li>
+</ul>
+<p>到这里，树莓派2B+的整个电路原理图已经基本分析完了，还是很简单的，但需要说明的是，官方提供的原理图不完整，还有许多细节没给出来，想要抄板仿制出来一个树莓派基本不可能了<br>有个关键性器件LAN9514 USB与网卡芯片电路图没有给出来，这里补上一张LAN9514 的系统框图供参考<br><img src="https://i.imgur.com/vqdAqcq.png" alt=""><br>官方文档上指出，USB接口供电源与板卡的供电源电路做了相应的隔离设计，防止像以前版本的树莓派在接带有外置电源的USB HUB时可能会出现倒灌电流的现象，但是你为什么不给出原理图呢，是不是还有别的坑没填呢。<br>到此，树莓派的硬件分析完毕</p>
+<h3 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h3><p>许多人一看到稍微大一点电路的原理图时就犯怵，这是很正常的，一开始我拿到树莓派的原理图时也很懵，一看里面的许多器件都没见过，这时候就需要耐下心来，一个一个模块来分析<br>我总结看懂电路图原理的四个要点是</p>
+<ul>
+<li>识别元件</li>
+<li>看清走线</li>
+<li>模块划分</li>
+<li>分析原理<br>然后按部就班地分解电路图<br>电路一定是按模块设计出来的，所以分析也要一个一个模块来分析   </li>
+</ul>
+<p>我分析电路原理图的一般步骤正如上文所描述的那样</p>
+<ul>
+<li>分析电源电路<br>一般一个板子的电源电路是最复杂也是最有意思的，分析清楚电源电路，接下来的模块电路分析就简单了</li>
+<li>分析主芯片供电、复位和起振电路<br>这个比较简单，也就是最小系统能跑起来的基本条件</li>
+<li>模块电路分析<br>模块电路分析要抓住核心器件，查看核心器件的datasheet，围绕这个核心器件来分析会事半功倍</li>
+</ul>
+<h3 id="不是题外话的题外话"><a href="#不是题外话的题外话" class="headerlink" title="不是题外话的题外话"></a>不是题外话的题外话</h3><p>随着物联网的兴起，现在开源硬件的热潮一波又一波，在这些浪潮之中的开源板卡有很多，比如Arduino、Raspberry、BeagleBlack、Intel Galileo、Intel MinNowBoard,Intel UpBoard，还有国产的香蕉派、香橙派、CubieBoard和96 Board等等，这么多板卡，能够处在浪潮之巅并且蜂拥前进的屈指可数，也就是Arduino、Raspberry和BeagleBlack了<br>其实板卡的做工、功能都差不多，为什么大多开源硬件都逃不出一波热，开锅熟，继而无人问津了呢<br>我理解主要有两点</p>
+<ul>
+<li>软件生态的完备程度<br>Arduino和其他板卡不同，是一块单片机，把单片机玩出生态，所以热度一直不减<br>树莓派受RS社区的推动，并且在全世界有一堆的传道者，其生态可以说是最完备的,虽然硬件没有完全开源，但依然阻止不了Geek们蠢蠢欲动的心<br>BeagleBlack虽然热度没有Raspberry那么热，但是由于其硬件全开源，社区也很活跃，投入的玩家也越来越多<br>反观Intel的系列板卡，采用的不是ARM核心，在众多玩家心里，ARM就意味着开源，X86、Atom想来搭开源硬件的顺风车，路漫漫其修远兮<br>而国产板卡的受众主要是国人，众多周知，国人在这一块的玩法较欧美国家还是要差一些的，最主要的是在国内，要建立起一个良好的社区氛围不容易，都有一颗Geek心，奈何完不成Geek的梦</li>
+<li>服务质量的良莠程度<br>这里不得不说的是，国产各种派的服务简直是不能人语，资料没法找，技术支持永远不在服务区，板卡上电启动冒烟无人理，你说这样的服务能把开源板卡做起来<br>在这里默默祭奠下我英年早逝的香橙派，我才上电啊，你怎么就冒烟了。。。</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 玩转树莓派 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[树莓派网络环境配置(Wire+STA+AP)]]></title>
       <url>/2017/10/19/2017-10-19-21-30%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE-wire+sta+ap/</url>
       <content type="html"><![CDATA[<h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派网络配置"><a href="#树莓派网络配置" class="headerlink" title="树莓派网络配置"></a>树莓派网络配置</h2><p>raspberry pi不同系统版本的网络配置方法略有不同，需要阅读官方文档，针对具体的版本进行配置，<br>以下设置针对stretch版本，其他版本未作测试  </p>
