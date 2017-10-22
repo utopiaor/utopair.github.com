@@ -270,6 +270,76 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-2017-10-22-11-30树莓派启动流程分析 " class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/10/22/2017-10-22-11-30树莓派启动流程分析 /" class="article-date">
+      <time datetime="2017-10-22T03:30:20.000Z" itemprop="datePublished">2017-10-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/22/2017-10-22-11-30树莓派启动流程分析 /">树莓派启动流程分析</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派bootloader启动流程分析"><a href="#树莓派bootloader启动流程分析" class="headerlink" title="树莓派bootloader启动流程分析"></a>树莓派bootloader启动流程分析</h2><p>本文分析树莓派从上电启动到linux内核启动整个流程，关于linux内核引导之后的流程那是后话，本文不涉及</p>
+<p>首先需要说明的是，树莓派不是完整意义上的开源硬件，系统启动这一块的代码是没有的，git官网镜像提供的是已经编译好的二进制文件，我想正式树莓派这种半开源的模式成就了树莓派，一来保证了芯片供应商博通的商业利益，二来有效防止了树莓派的仿冒，从而让树莓派在开源硬件的竞争中站稳了脚跟。虽然没有源代码，关于树莓派启动这一块的分析还是可以大致分析的，下面就来简单分析下树莓派的启动流程。</p>
+<p>为了降低成本，树莓派省去了传统计算机用来存储引导加载程序的板载存储器(BIOS), 直接把引导程序放在了SD卡中。树莓派2具有一款博通的BCM2836系统芯片, 当启动时，ARM Cortex-A7的CPU会处于复位状态,由VideoCore IV GPU核心负责启动系统,也就是boot的启动是由GPU code来完成，而不是cpu，这是与一般ARM架构的处理器不一样的地方。<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/玩转树莓派/">玩转树莓派</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2017/10/22/2017-10-22-11-30树莓派启动流程分析 /#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-2017-10-21-12-09树莓派硬件分析 " class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -894,75 +964,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2017/10/10/hello-world/" class="article-date">
-      <time datetime="2017-10-10T04:46:36.000Z" itemprop="datePublished">2017-10-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/10/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/技术/">技术</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2017/10/10/hello-world/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">

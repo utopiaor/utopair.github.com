@@ -3,6 +3,40 @@
   
     
     <entry>
+      <title><![CDATA[树莓派启动流程分析]]></title>
+      <url>/2017/10/22/2017-10-22-11-30%E6%A0%91%E8%8E%93%E6%B4%BE%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90%20/</url>
+      <content type="html"><![CDATA[<h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派bootloader启动流程分析"><a href="#树莓派bootloader启动流程分析" class="headerlink" title="树莓派bootloader启动流程分析"></a>树莓派bootloader启动流程分析</h2><p>本文分析树莓派从上电启动到linux内核启动整个流程，关于linux内核引导之后的流程那是后话，本文不涉及</p>
+<p>首先需要说明的是，树莓派不是完整意义上的开源硬件，系统启动这一块的代码是没有的，git官网镜像提供的是已经编译好的二进制文件，我想正式树莓派这种半开源的模式成就了树莓派，一来保证了芯片供应商博通的商业利益，二来有效防止了树莓派的仿冒，从而让树莓派在开源硬件的竞争中站稳了脚跟。虽然没有源代码，关于树莓派启动这一块的分析还是可以大致分析的，下面就来简单分析下树莓派的启动流程。</p>
+<p>为了降低成本，树莓派省去了传统计算机用来存储引导加载程序的板载存储器(BIOS), 直接把引导程序放在了SD卡中。树莓派2具有一款博通的BCM2836系统芯片, 当启动时，ARM Cortex-A7的CPU会处于复位状态,由VideoCore IV GPU核心负责启动系统,也就是boot的启动是由GPU code来完成，而不是cpu，这是与一般ARM架构的处理器不一样的地方。<br><a id="more"></a><br>首先罗列下树莓派启动会用到的文件</p>
+<blockquote>
+<p>pi@raspberrypi ~ $ ls -a /boot/<br>.                       COPYING.linux     LICENSE.oracle<br>..                      fixup_cd.dat      overlays<br>bcm2708-rpi-b.dtb       fixup.dat         start_cd.elf<br>bcm2708-rpi-b-plus.dtb  fixup_db.dat      start_db.elf<br>bcm2708-rpi-cm.dtb      fixup_x.dat       start.elf<br>bcm2709-rpi-2-b.dtb     issue.txt         start_x.elf<br>bootcode.bin            kernel7.img       System Volume Information<br>cmdline.txt             kernel.img<br>config.txt              LICENCE.broadcom</p>
+</blockquote>
+<h3 id="bootloader第一阶段"><a href="#bootloader第一阶段" class="headerlink" title="bootloader第一阶段"></a>bootloader第一阶段</h3><p>树莓派的启动是有GPU和CPU协同工作完成的，上电后，首先运行的是SOC里面的一个小核心（secure core），secure core是在SOC内的FLASH预先烧录的一端程序，这段程序检查OTP并运行SOC rom内的程序，rom内的程序会初始化一些设备，但其最主要的功能是用来引导boot的第二阶段，第二阶段的程序位于SD卡的/boot目录下的bootcode.bin，是我们烧录进去的。</p>
+<h3 id="bootloader第二阶段"><a href="#bootloader第二阶段" class="headerlink" title="bootloader第二阶段"></a>bootloader第二阶段</h3><p>bootloader第二阶段的程序是bootcode.bin，这个bin文件相当于GPU的引导文件，bootcode.bin会初始化SDRAM然后从SD卡上检索GPU固件（start.elf），然后运行它，从而启动GPU</p>
+<h3 id="bootloader第三阶段"><a href="#bootloader第三阶段" class="headerlink" title="bootloader第三阶段"></a>bootloader第三阶段</h3><p>第三阶段的程序是start.elf，GPU加载执行start.elf来负责图像输出工作，start.elf读取config.txt来设置图像输出格式，在完成Video Core IV的初始化之后，start.elf会读取cmdline.txt，cmdline.txt包含内核运行的参数，用来初始化CPU的clock和串口等设备，然后将kernel.img加载到GPU分配的共享内存里，最后触发CPU的reset，将引导工作交付给CPU </p>
+<p>这里比较有意思的是start.elf除了传递基本的内核参数给CPU，也会传递一些额外的参数，比如DMA通道、GPU参数、MAC地址、eMMC时钟速度和内核寻址范围等等，额外传递的参数如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">dma.dmachans=0x7f35</div><div class="line">bcm2708_fb.fbwidth=1280</div><div class="line">bcm2708_fb.fbheight=1024</div><div class="line">bcm2708.boardrev=0xe</div><div class="line">bcm2708.serial=0xd9b35572</div><div class="line">smsc95xx.macaddr=B8:27:EB:B3:55:72</div><div class="line">sdhci-bcm2708.emmc_clock_freq=250000000</div><div class="line">vc_mem.mem_base=0xec00000</div><div class="line">vc_mem.mem_size=0x10000000</div><div class="line">console=ttyAMA0,115200</div><div class="line">kgdboc=ttyAMA0,115200</div><div class="line">console=tty1</div><div class="line">root=/dev/mmcblk0p2</div><div class="line">rootfstype=ext4</div><div class="line">rootwait</div></pre></td></tr></table></figure></p>
+<p>而这些参数在主流的内核里是没有的</p>
+<h3 id="bootloader第四阶段"><a href="#bootloader第四阶段" class="headerlink" title="bootloader第四阶段"></a>bootloader第四阶段</h3><p>这一阶段的启动就是嵌入开发中常规的引导过程，CPU复位之后，执行kernel.img，将内核解压缩并启动start_kernel，完成一系列设备的初始化，启动0号进程init_task（内核态）,继而启动1号进程kthread（内核态），kthread负责执行内核的部分初始化工作及进行系统配置并创建若干个用于高速缓存和虚拟主存管理的内核线程，然后kthread调用execve运行init函数（内核态），然后演变成用户态1号进程，即init进程（用户态），用户态init按照配置文件/etc/initab的要求，完成系统启动工作，创建编号为1号、2号…的若干终端注册进程getty，最终进入应用程序</p>
+<h2 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h2><p>由于树莓派上电启动过程中用到的二进制文件代码都不是开源的，所以树莓派不像一般的CPU bootloader启动方式，但这并不影响我们使用树莓派，毕竟我们也不必老是折腾启动，同时由于树莓派的这种启动方式，导致了树莓派不是一个裸机ARM，就会出现了无法像单片机一样直接对树莓派编程，也需要其核心引导之后进入系统才行，因此拿树莓派来做裸机开发就不合适了。</p>
+<p>值得说明的是，由于树莓派的启动核心VideoCore IV是博通的Broadcom BCM2836， 这块芯片是博通特供树莓派使用的，一般人拿不到博通的这块芯片的，博通也不会提供技术支持，树莓派核心显卡的程序是无法移植到其他的芯片上去的，所以市面上树莓派基本没有假的。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 玩转树莓派 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[树莓派硬件分析]]></title>
       <url>/2017/10/21/2017-10-21-12-09%E6%A0%91%E8%8E%93%E6%B4%BE%E7%A1%AC%E4%BB%B6%E5%88%86%E6%9E%90%20/</url>
       <content type="html"><![CDATA[<h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派硬件分析"><a href="#树莓派硬件分析" class="headerlink" title="树莓派硬件分析"></a>树莓派硬件分析</h2><p>众里寻他千百度，青天白夜荡谷歌，纵观整个网络，没有找到一篇详细介绍树莓派硬件设计的文章，不免唏嘘。树莓派作为一款开源卡片式电脑，基于Broadcom商业策略的考虑，硬件没有完全开源，可以理解，但是对于硬件已经开源的部分，很少人来分析、研究和扩展，我理解树莓派的生态在硬件层面上是有一定残缺的。<br>Anyway,树莓派作为一款“开源硬件”，其价值并不在于硬件的扩展性，而在于软件设计，Geek们利用树莓派开放的GPIO的硬件能力，构建起了庞大的软件生态，可以说，树莓派其实是一个基于硬件的软件开源平台。<br>下面，我简单分析下树莓派的硬件设计。</p>

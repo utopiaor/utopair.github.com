@@ -15,31 +15,18 @@
 
 
 
-<meta name="description" content="玩转树莓派树莓派简介1、树莓派是什么Raspberry Pi(中文名为“树莓派”,简写为RPi，或者RasPi/RPi)是为学生计算机编程教育而设计，只有信用卡 大小的卡片式电脑，其系统基于Linux。树莓派由注册于英国的慈善组织“Raspberry Pi 基金会”开发，Eben·Upton/埃·厄普顿为项目带头人。2012年3月，英国剑桥大学埃本·阿普顿（Eben Epton）正式发售世界上最小">
+<meta name="description" content="玩转树莓派树莓派bootloader启动流程分析本文分析树莓派从上电启动到linux内核启动整个流程，关于linux内核引导之后的流程那是后话，本文不涉及 首先需要说明的是，树莓派不是完整意义上的开源硬件，系统启动这一块的代码是没有的，git官网镜像提供的是已经编译好的二进制文件，我想正式树莓派这种半开源的模式成就了树莓派，一来保证了芯片供应商博通的商业利益，二来有效防止了树莓派的仿冒，从而让树莓">
 <meta name="keywords" content="玩转树莓派">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树莓派简介">
-<meta property="og:url" content="http://utopiaor.github.io/2017/10/14/2017-10-14-14-40树莓派简介/index.html">
+<meta property="og:title" content="树莓派启动流程分析">
+<meta property="og:url" content="http://utopiaor.github.io/2017/10/22/2017-10-22-11-30树莓派启动流程分析 /index.html">
 <meta property="og:site_name" content="utopiaor">
-<meta property="og:description" content="玩转树莓派树莓派简介1、树莓派是什么Raspberry Pi(中文名为“树莓派”,简写为RPi，或者RasPi/RPi)是为学生计算机编程教育而设计，只有信用卡 大小的卡片式电脑，其系统基于Linux。树莓派由注册于英国的慈善组织“Raspberry Pi 基金会”开发，Eben·Upton/埃·厄普顿为项目带头人。2012年3月，英国剑桥大学埃本·阿普顿（Eben Epton）正式发售世界上最小">
+<meta property="og:description" content="玩转树莓派树莓派bootloader启动流程分析本文分析树莓派从上电启动到linux内核启动整个流程，关于linux内核引导之后的流程那是后话，本文不涉及 首先需要说明的是，树莓派不是完整意义上的开源硬件，系统启动这一块的代码是没有的，git官网镜像提供的是已经编译好的二进制文件，我想正式树莓派这种半开源的模式成就了树莓派，一来保证了芯片供应商博通的商业利益，二来有效防止了树莓派的仿冒，从而让树莓">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/Qe4uDAe.png">
-<meta property="og:image" content="https://i.imgur.com/bB5P7Jv.png">
-<meta property="og:image" content="https://i.imgur.com/073ZyQ6.png">
-<meta property="og:image" content="https://i.imgur.com/TtiGDU8.png">
-<meta property="og:image" content="https://i.imgur.com/ozJRpEz.png">
-<meta property="og:image" content="https://i.imgur.com/gDrSD0z.png">
-<meta property="og:image" content="https://i.imgur.com/pizReHj.png">
-<meta property="og:image" content="https://i.imgur.com/1ZjQQex.png">
-<meta property="og:image" content="https://i.imgur.com/FYCGO05.png">
-<meta property="og:image" content="https://i.imgur.com/IGFX5Sm.png">
-<meta property="og:image" content="https://i.imgur.com/QGHaeCP.png">
-<meta property="og:image" content="https://i.imgur.com/1ersydG.png">
-<meta property="og:updated_time" content="2017-10-15T07:16:52.883Z">
+<meta property="og:updated_time" content="2017-10-22T04:34:31.957Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="树莓派简介">
-<meta name="twitter:description" content="玩转树莓派树莓派简介1、树莓派是什么Raspberry Pi(中文名为“树莓派”,简写为RPi，或者RasPi/RPi)是为学生计算机编程教育而设计，只有信用卡 大小的卡片式电脑，其系统基于Linux。树莓派由注册于英国的慈善组织“Raspberry Pi 基金会”开发，Eben·Upton/埃·厄普顿为项目带头人。2012年3月，英国剑桥大学埃本·阿普顿（Eben Epton）正式发售世界上最小">
-<meta name="twitter:image" content="https://i.imgur.com/Qe4uDAe.png">
+<meta name="twitter:title" content="树莓派启动流程分析">
+<meta name="twitter:description" content="玩转树莓派树莓派bootloader启动流程分析本文分析树莓派从上电启动到linux内核启动整个流程，关于linux内核引导之后的流程那是后话，本文不涉及 首先需要说明的是，树莓派不是完整意义上的开源硬件，系统启动这一块的代码是没有的，git官网镜像提供的是已经编译好的二进制文件，我想正式树莓派这种半开源的模式成就了树莓派，一来保证了芯片供应商博通的商业利益，二来有效防止了树莓派的仿冒，从而让树莓">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -71,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>树莓派简介 | utopiaor</title>
+<title>树莓派启动流程分析 | utopiaor</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -278,11 +265,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-2017-10-14-14-40树莓派简介" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-2017-10-22-11-30树莓派启动流程分析 " class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/10/14/2017-10-14-14-40树莓派简介/" class="article-date">
-      <time datetime="2017-10-14T06:40:36.000Z" itemprop="datePublished">2017-10-14</time>
+      <a href="/2017/10/22/2017-10-22-11-30树莓派启动流程分析 /" class="article-date">
+      <time datetime="2017-10-22T03:30:20.000Z" itemprop="datePublished">2017-10-22</time>
 </a>
 
 
@@ -297,7 +284,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      树莓派简介
+      树莓派启动流程分析
     </h1>
   
 
@@ -322,16 +309,20 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派简介"><a href="#树莓派简介" class="headerlink" title="树莓派简介"></a>树莓派简介</h2><h3 id="1、树莓派是什么"><a href="#1、树莓派是什么" class="headerlink" title="1、树莓派是什么"></a>1、树莓派是什么</h3><p>Raspberry Pi(中文名为“树莓派”,简写为RPi，或者RasPi/RPi)是为学生计算机编程教育而设计，只有信用卡 大小的卡片式电脑，其系统基于Linux。<br>树莓派由注册于英国的慈善组织“Raspberry Pi 基金会”开发，Eben·Upton/埃·厄普顿为项目带头人。2012年3月，英国剑桥大学埃本·阿普顿（Eben Epton）正式发售世界上最小的台式机，又称卡片式电脑，外形只有信用卡大小，却具有电脑的所有基本功能，这就是Raspberry Pi电脑板，中文译名”树莓派”！这一基金会以提升学校计算机科学及相关学科的教育，让计算机变得有趣为宗旨。基金会期望这 一款电脑无论是在发展中国家还是在发达国家，会有更多的其它应用不断被开发出来，并应用到更多领域。<br> <a id="more"></a>  </p>
-<pre><code>一句话：树莓派是一个卡片大小的开发板，上面可以运行Linux系统，我们可以用它开发我想要的设备。  
-</code></pre><p>以下是树莓派2B的实物图<br><img src="https://i.imgur.com/Qe4uDAe.png" alt=""></p>
-<h3 id="2、树莓派的种类"><a href="#2、树莓派的种类" class="headerlink" title="2、树莓派的种类"></a>2、树莓派的种类</h3><p>A型：1个USB、无有线网络接口、功率2.5W,500mA、256MB RAM（基本已经见不到了）<br>B型：2个USB、支持有线网络、功率3.5W，700mA、512MB RAM、26个GPIO(市售还有很多)。<br>B+型：4个USB口、支持有线网络，功耗1W，512M RAM 40个GPIO（2014新出的，推荐使用）<br>购买请在淘宝上搜一下，非常多：200到–300元之间（裸板，不含SD卡、电源）<br><img src="https://i.imgur.com/bB5P7Jv.png" alt="raspberry1"></p>
-<h3 id="3、树莓派参数"><a href="#3、树莓派参数" class="headerlink" title="3、树莓派参数"></a>3、树莓派参数</h3><p>B型：<br>处理器<br>BroadcomBCM2835（CPU，GPU，DSP和SDRAM，USB）<br>CPU<br>ARM1176JZF-S核心（ARM11系列）700MHz<br>GPU<br>Broadcom VideoCrore IV，OpenGL ES 2.0,1080p 30 h.264/MPEG-4 AVC高清解码器<br>内存<br>512MByte<br>USB 2.0<br>2（支持USB hub扩展）<br>影像输出<br>Composite RCA（PAL &amp; NTSC），HDMI（rev 1.3 &amp; 1.4），raw LCD Panels via DSI 14 HDMI resolution from 640x350 to 1920x1200 plus various PAL andNTSC standards<br>音源输出<br>3.5mm插孔，HDMI<br>板载存储<br>SD/MMC/SDIO卡插槽<br>网络接口<br>10/100以太网接口<br>外设<br>8xGPIO、UART、I2C、带两个选择的SPI总线，+3.3V，+5V，ground（负极）<br>额定功率<br>700mA（3.5W）<br>电源输入<br>5V / 通过MicroUSB或GPIO头<br>总体尺寸<br>85.60 x 53.98 mm（3.370 x 2.125 in）<br>操作系统<br>Debian GNU/linux，Fedora，Arch Linux ARM，RISC OS, XBMC</p>
-<p>B+改进<br>• 更多的GPIO：B+将通用输入输出引脚增加到了40个，而Model B则只有26个；<br>• 更多的USB：B+提供了4个USB端口，对热插拔有着更好的兼容性(Model B只有2个)；<br>• 支持microSD：旧款的SD卡插槽，已经被换成了更漂亮的推入式microSD卡槽；<br>• 更低的功耗：将线性式稳压器换成了开关式，功耗降低了0.5W到1W；<br>• 更好的音频：音频电路部分采用了专用的低噪供电；<br>• 简洁的外形：USB接口被推到了主板的一边，复合视频移到了3.5mm音频口的位置，此外还增加了4个独立的安装孔。  </p>
-<h3 id="4、树莓派分布图"><a href="#4、树莓派分布图" class="headerlink" title="4、树莓派分布图"></a>4、树莓派分布图</h3><p>B型，B+类似，请自行对比参考<br><img src="https://i.imgur.com/073ZyQ6.png" alt="raspberry2">  </p>
-<h3 id="5、支持的操作系统"><a href="#5、支持的操作系统" class="headerlink" title="5、支持的操作系统"></a>5、支持的操作系统</h3><p> 树莓派支持多种操作系统，如官方操作系统为raspberryPi,ubuntu，Window10 IOT和google定制android等<br><img src="https://i.imgur.com/TtiGDU8.png" alt="">  </p>
-<h3 id="6、各代产品的对比"><a href="#6、各代产品的对比" class="headerlink" title="6、各代产品的对比"></a>6、各代产品的对比</h3><p><img src="https://i.imgur.com/ozJRpEz.png" alt="">  </p>
-<h3 id="7、树莓派的用途"><a href="#7、树莓派的用途" class="headerlink" title="7、树莓派的用途"></a>7、树莓派的用途</h3><p>• 树莓派编程<br><img src="https://i.imgur.com/gDrSD0z.png" alt=""><br>• 树莓派外接传感器<br><img src="https://i.imgur.com/pizReHj.png" alt=""><br>• 树莓派网络监控<br><img src="https://i.imgur.com/1ZjQQex.png" alt=""><br>• 树莓派网络小车<br><img src="https://i.imgur.com/FYCGO05.png" alt=""><br>• 树莓派科学上网<br><img src="https://i.imgur.com/IGFX5Sm.png" alt=""><br>• 树莓派网络电视盒子<br><img src="https://i.imgur.com/QGHaeCP.png" alt=""><br>• 树莓派路由器<br><img src="https://i.imgur.com/1ersydG.png" alt="">  </p>
+        <h1 id="玩转树莓派"><a href="#玩转树莓派" class="headerlink" title="玩转树莓派"></a>玩转树莓派</h1><h2 id="树莓派bootloader启动流程分析"><a href="#树莓派bootloader启动流程分析" class="headerlink" title="树莓派bootloader启动流程分析"></a>树莓派bootloader启动流程分析</h2><p>本文分析树莓派从上电启动到linux内核启动整个流程，关于linux内核引导之后的流程那是后话，本文不涉及</p>
+<p>首先需要说明的是，树莓派不是完整意义上的开源硬件，系统启动这一块的代码是没有的，git官网镜像提供的是已经编译好的二进制文件，我想正式树莓派这种半开源的模式成就了树莓派，一来保证了芯片供应商博通的商业利益，二来有效防止了树莓派的仿冒，从而让树莓派在开源硬件的竞争中站稳了脚跟。虽然没有源代码，关于树莓派启动这一块的分析还是可以大致分析的，下面就来简单分析下树莓派的启动流程。</p>
+<p>为了降低成本，树莓派省去了传统计算机用来存储引导加载程序的板载存储器(BIOS), 直接把引导程序放在了SD卡中。树莓派2具有一款博通的BCM2836系统芯片, 当启动时，ARM Cortex-A7的CPU会处于复位状态,由VideoCore IV GPU核心负责启动系统,也就是boot的启动是由GPU code来完成，而不是cpu，这是与一般ARM架构的处理器不一样的地方。<br><a id="more"></a><br>首先罗列下树莓派启动会用到的文件</p>
+<blockquote>
+<p>pi@raspberrypi ~ $ ls -a /boot/<br>.                       COPYING.linux     LICENSE.oracle<br>..                      fixup_cd.dat      overlays<br>bcm2708-rpi-b.dtb       fixup.dat         start_cd.elf<br>bcm2708-rpi-b-plus.dtb  fixup_db.dat      start_db.elf<br>bcm2708-rpi-cm.dtb      fixup_x.dat       start.elf<br>bcm2709-rpi-2-b.dtb     issue.txt         start_x.elf<br>bootcode.bin            kernel7.img       System Volume Information<br>cmdline.txt             kernel.img<br>config.txt              LICENCE.broadcom</p>
+</blockquote>
+<h3 id="bootloader第一阶段"><a href="#bootloader第一阶段" class="headerlink" title="bootloader第一阶段"></a>bootloader第一阶段</h3><p>树莓派的启动是有GPU和CPU协同工作完成的，上电后，首先运行的是SOC里面的一个小核心（secure core），secure core是在SOC内的FLASH预先烧录的一端程序，这段程序检查OTP并运行SOC rom内的程序，rom内的程序会初始化一些设备，但其最主要的功能是用来引导boot的第二阶段，第二阶段的程序位于SD卡的/boot目录下的bootcode.bin，是我们烧录进去的。</p>
+<h3 id="bootloader第二阶段"><a href="#bootloader第二阶段" class="headerlink" title="bootloader第二阶段"></a>bootloader第二阶段</h3><p>bootloader第二阶段的程序是bootcode.bin，这个bin文件相当于GPU的引导文件，bootcode.bin会初始化SDRAM然后从SD卡上检索GPU固件（start.elf），然后运行它，从而启动GPU</p>
+<h3 id="bootloader第三阶段"><a href="#bootloader第三阶段" class="headerlink" title="bootloader第三阶段"></a>bootloader第三阶段</h3><p>第三阶段的程序是start.elf，GPU加载执行start.elf来负责图像输出工作，start.elf读取config.txt来设置图像输出格式，在完成Video Core IV的初始化之后，start.elf会读取cmdline.txt，cmdline.txt包含内核运行的参数，用来初始化CPU的clock和串口等设备，然后将kernel.img加载到GPU分配的共享内存里，最后触发CPU的reset，将引导工作交付给CPU </p>
+<p>这里比较有意思的是start.elf除了传递基本的内核参数给CPU，也会传递一些额外的参数，比如DMA通道、GPU参数、MAC地址、eMMC时钟速度和内核寻址范围等等，额外传递的参数如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">dma.dmachans=0x7f35</div><div class="line">bcm2708_fb.fbwidth=1280</div><div class="line">bcm2708_fb.fbheight=1024</div><div class="line">bcm2708.boardrev=0xe</div><div class="line">bcm2708.serial=0xd9b35572</div><div class="line">smsc95xx.macaddr=B8:27:EB:B3:55:72</div><div class="line">sdhci-bcm2708.emmc_clock_freq=250000000</div><div class="line">vc_mem.mem_base=0xec00000</div><div class="line">vc_mem.mem_size=0x10000000</div><div class="line">console=ttyAMA0,115200</div><div class="line">kgdboc=ttyAMA0,115200</div><div class="line">console=tty1</div><div class="line">root=/dev/mmcblk0p2</div><div class="line">rootfstype=ext4</div><div class="line">rootwait</div></pre></td></tr></table></figure></p>
+<p>而这些参数在主流的内核里是没有的</p>
+<h3 id="bootloader第四阶段"><a href="#bootloader第四阶段" class="headerlink" title="bootloader第四阶段"></a>bootloader第四阶段</h3><p>这一阶段的启动就是嵌入开发中常规的引导过程，CPU复位之后，执行kernel.img，将内核解压缩并启动start_kernel，完成一系列设备的初始化，启动0号进程init_task（内核态）,继而启动1号进程kthread（内核态），kthread负责执行内核的部分初始化工作及进行系统配置并创建若干个用于高速缓存和虚拟主存管理的内核线程，然后kthread调用execve运行init函数（内核态），然后演变成用户态1号进程，即init进程（用户态），用户态init按照配置文件/etc/initab的要求，完成系统启动工作，创建编号为1号、2号…的若干终端注册进程getty，最终进入应用程序</p>
+<h2 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h2><p>由于树莓派上电启动过程中用到的二进制文件代码都不是开源的，所以树莓派不像一般的CPU bootloader启动方式，但这并不影响我们使用树莓派，毕竟我们也不必老是折腾启动，同时由于树莓派的这种启动方式，导致了树莓派不是一个裸机ARM，就会出现了无法像单片机一样直接对树莓派编程，也需要其核心引导之后进入系统才行，因此拿树莓派来做裸机开发就不合适了。</p>
+<p>值得说明的是，由于树莓派的启动核心VideoCore IV是博通的Broadcom BCM2836， 这块芯片是博通特供树莓派使用的，一般人拿不到博通的这块芯片的，博通也不会提供技术支持，树莓派核心显卡的程序是无法移植到其他的芯片上去的，所以市面上树莓派基本没有假的。</p>
 
       
     </div>
@@ -340,13 +331,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/10/14/2017-10-14-14-40树莓派简介/">树莓派简介</a></p>
+        <p><span>本文标题:</span><a href="/2017/10/22/2017-10-22-11-30树莓派启动流程分析 /">树莓派启动流程分析</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">utopiaor</a></p>
-        <p><span>发布时间:</span>2017-10-14, 14:40:36</p>
-        <p><span>最后更新:</span>2017-10-15, 15:16:52</p>
+        <p><span>发布时间:</span>2017-10-22, 11:30:20</p>
+        <p><span>最后更新:</span>2017-10-22, 12:34:31</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/10/14/2017-10-14-14-40树莓派简介/" title="树莓派简介">http://utopiaor.github.io/2017/10/14/2017-10-14-14-40树莓派简介/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://utopiaor.github.io/2017/10/14/2017-10-14-14-40树莓派简介/　　作者: utopiaor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/10/22/2017-10-22-11-30树莓派启动流程分析 /" title="树莓派启动流程分析">http://utopiaor.github.io/2017/10/22/2017-10-22-11-30树莓派启动流程分析 /</a>
+            <span class="copy-path" data-clipboard-text="原文: http://utopiaor.github.io/2017/10/22/2017-10-22-11-30树莓派启动流程分析 /　　作者: utopiaor" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -358,16 +349,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/10/15/2017-10-15-12-00树莓派安装/">
-                    树莓派系统安装与启动
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2017/10/12/test/">
-                    Test eaasy
+                <a href="/2017/10/21/2017-10-21-12-09树莓派硬件分析 /">
+                    树莓派硬件分析
                 </a>
             </div>
         
@@ -379,7 +364,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#玩转树莓派"><span class="toc-number">1.</span> <span class="toc-text">玩转树莓派</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#树莓派简介"><span class="toc-number">1.1.</span> <span class="toc-text">树莓派简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、树莓派是什么"><span class="toc-number">1.1.1.</span> <span class="toc-text">1、树莓派是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、树莓派的种类"><span class="toc-number">1.1.2.</span> <span class="toc-text">2、树莓派的种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、树莓派参数"><span class="toc-number">1.1.3.</span> <span class="toc-text">3、树莓派参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、树莓派分布图"><span class="toc-number">1.1.4.</span> <span class="toc-text">4、树莓派分布图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、支持的操作系统"><span class="toc-number">1.1.5.</span> <span class="toc-text">5、支持的操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、各代产品的对比"><span class="toc-number">1.1.6.</span> <span class="toc-text">6、各代产品的对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、树莓派的用途"><span class="toc-number">1.1.7.</span> <span class="toc-text">7、树莓派的用途</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#玩转树莓派"><span class="toc-number">1.</span> <span class="toc-text">玩转树莓派</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#树莓派bootloader启动流程分析"><span class="toc-number">1.1.</span> <span class="toc-text">树莓派bootloader启动流程分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bootloader第一阶段"><span class="toc-number">1.1.1.</span> <span class="toc-text">bootloader第一阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bootloader第二阶段"><span class="toc-number">1.1.2.</span> <span class="toc-text">bootloader第二阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bootloader第三阶段"><span class="toc-number">1.1.3.</span> <span class="toc-text">bootloader第三阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bootloader第四阶段"><span class="toc-number">1.1.4.</span> <span class="toc-text">bootloader第四阶段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题外话"><span class="toc-number">1.2.</span> <span class="toc-text">题外话</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -423,15 +408,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/10/15/2017-10-15-12-00树莓派安装/" title="上一篇: 树莓派系统安装与启动">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2017/10/12/test/" title="下一篇: Test eaasy">
+            <a href="/2017/10/21/2017-10-21-12-09树莓派硬件分析 /" title="下一篇: 树莓派硬件分析">
                 <i class="fa fa-angle-right"></i>
             </a>
         
