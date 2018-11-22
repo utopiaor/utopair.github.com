@@ -3,6 +3,35 @@
   
     
     <entry>
+      <title><![CDATA[找不到工作系列之递去归来兮]]></title>
+      <url>/2018/11/23/2018-11-20-00-00%E6%89%BE%E4%B8%8D%E5%88%B0%E5%B7%A5%E7%B3%BB%E5%88%97%E4%B9%8B%E9%80%92%E6%9D%A5%E5%BD%92%E5%8E%BB%E5%85%AE/</url>
+      <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>何为递归，递归就是递归，递去归来也。</p>
+<p>一个很好的例子是GNU = GNU is NOT UNIX</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">GNU</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> GNU() + <span class="string">'is Not Unix'</span></div></pre></td></tr></table></figure>
+<p>这是一个永远不会返回的递归调用，或许也寓意GNU生生不息吧。</p>
+<p>我们从几个简单的例子来说起:</p>
+<h2 id="求一组数据的累加和"><a href="#求一组数据的累加和" class="headerlink" title="求一组数据的累加和"></a>求一组数据的累加和</h2><p>这里不考虑数学算法层面，从常识的角度，有如下迭代解法</p>
+<p><img src="assets/1542893964180.png" alt="1542893964180"></p>
+<p>代码很简单，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(arr)</span>:</span></div><div class="line">    sum = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> arr:</div><div class="line">        sum = sum + i</div><div class="line">    <span class="keyword">return</span> sum</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 面试 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[技术面试之准备阶段]]></title>
       <url>/2018/11/20/2018-11-20-00-00%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E4%B9%8B%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5/</url>
       <content type="html"><![CDATA[<p>根据我的面试经历，技术面试的问题会集中在三个方面</p>
